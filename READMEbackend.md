@@ -1,5 +1,11 @@
 # Best practices
-- ### Java naming convention
+
+- ## Websides recommendation
+
+    - [Polish](https://bykowski.pl)
+    - [English](https://www.baeldung.com)
+
+- ## Java naming convention
 
   > There are only two hard things in Computer Science: cache invalidation and naming things.
 
@@ -334,4 +340,3 @@ List<ItemDto> mapToDto (List<Item> items);
 - #### Serwisy wykonują procesowanie requestów(biznes logika), wywołują inne serwisy lub metody z warstwy danych oraz zwracają wynik
 - #### Warstwa danych reprezentowana przez `@Repository` zwraca dane z bazy danych w postaci entity lub views.
 - #### Kontrolery powiązane tylko z serwisami -> serwisy tylko z warstwą persistance lub innymi serwisami -> warstwa persistance nie jest powiązana z żadną z powyższych warstw
-
