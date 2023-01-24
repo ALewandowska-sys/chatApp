@@ -2,6 +2,7 @@ package com.spring.chat.user;
 
 import io.swagger.annotations.ApiModel;
 import jakarta.persistence.*;
+//import javax.persistence.*;
 
 import java.util.Set;
 
@@ -13,13 +14,14 @@ public class User {
     private Long id;
     private String username;
     private String password;
-    private Set<User> favourite;
+//    @ManyToMany
+//    private Set<User> favourite;
 
     public User(Long id, String username, String password, Set<User> favourite) {
         this.id = id;
         this.username = username;
         this.password = password;
-        this.favourite = favourite;
+//        this.favourite = favourite;
     }
     public User(){}
 
@@ -43,11 +45,11 @@ public class User {
         this.password = password;
     }
 
-    public Set<User> getFavourite() {
-        return favourite;
-    }
-
-    public void setFavourite(Set<User> favourite) {
-        this.favourite = favourite;
-    }
+//    public Set<User> getFavourite() {
+//        return favourite;
+//    }
+//
+//    public void setFavourite(Set<User> favourite) {
+//        this.favourite = favourite;
+//    }
 }
