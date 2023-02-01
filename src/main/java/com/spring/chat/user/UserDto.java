@@ -6,9 +6,9 @@ public class UserDto {
     private Long id;
     private String username;
     private String password;
-    private Set<User> favourite;
+    private Set<FriendDto> favourite;
 
-    public UserDto(Long id, String username, String password, Set<User> favourite) {
+    public UserDto(Long id, String username, String password, Set<FriendDto> favourite) {
         this.id = id;
         this.username = username;
         this.password = password;
@@ -18,6 +18,9 @@ public class UserDto {
 
     public Long getId() {
         return id;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getUsername() {
@@ -36,11 +39,11 @@ public class UserDto {
         this.password = password;
     }
 
-    public Set<User> getFavourite() {
+    public Set<FriendDto> getFavourite() {
         return favourite;
     }
 
-    public void setFavourite(Set<User> favourite) {
+    public void setFavourite(Set<FriendDto> favourite) {
         this.favourite = favourite;
     }
 }
