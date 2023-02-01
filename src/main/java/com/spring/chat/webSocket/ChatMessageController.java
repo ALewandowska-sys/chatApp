@@ -1,6 +1,5 @@
-package com.spring.chat.controller;
+package com.spring.chat.webSocket;
 
-import com.spring.chat.webSocket.ChatMessage;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
