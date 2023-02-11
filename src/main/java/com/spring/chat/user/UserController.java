@@ -26,13 +26,6 @@ public class UserController {
         return userService.getUserByName(username);
     }
 
-
-
-
-
-
-
-
     @GetMapping("/byId/{userId}")
     public UserDto getUserById(@RequestParam(value = "userId") Long userId){
         return userService.getUserById(userId);
