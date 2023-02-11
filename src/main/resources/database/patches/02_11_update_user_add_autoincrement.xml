@@ -1,0 +1,12 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="02_11_update_user_table_add_autoincrement" author="alewandowska">
+        <addAutoIncrement tableName="user_model"
+                          columnDataType="bigint"
+                          columnName="id"/>
+    </changeSet>
+
+</databaseChangeLog>
