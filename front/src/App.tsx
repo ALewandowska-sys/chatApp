@@ -7,12 +7,10 @@ import Header from './components/header/Header';
 function App() {
   return (
     <BrowserRouter>
-    <>
       <Header />
       <Routes>
         <Route path="/myhome" element={<PagesUserHome />} />
       </Routes>
-    </>
     </BrowserRouter>
   );
 }
