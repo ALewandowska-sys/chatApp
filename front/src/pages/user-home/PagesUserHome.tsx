@@ -43,10 +43,13 @@ export default function PagesUserHome() {
                   </div>
                   <div className="card-footer text-muted">
                     <div>
-                      { post.created_at.toDateString() }
+                      Reactions: { post.reactions.length }
                     </div>
                     <div>
                       <a href="#" style={{textDecoration: "none"}}> Pokaż Komentarze: ({post.commentsCount}) </a>
+                    </div>
+                    <div>
+                      { post.created_at.toDateString() }
                     </div>
                   </div>
                 </div>

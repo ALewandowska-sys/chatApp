@@ -1,4 +1,5 @@
 import { PostResponse } from "../responses/PostResponse";
+import { postCommentsMock } from "./post-comments-mock";
 import { postsMock } from "./posts-mock";
 import { postsReactionsMock } from "./posts-reactions-mock";
 import { usersMock } from "./users-mock";
@@ -11,7 +12,7 @@ export const PostResponseMock: PostResponse[] = [
       ...getUserByPostId(1)
     },
     reactions: getPostsReactionsById(1),
-    commentsCount: getPostsReactionsById(1).length,
+    commentsCount: countCommentsByPostId(1),
   },
   {
     id: 2,
@@ -20,12 +21,17 @@ export const PostResponseMock: PostResponse[] = [
       ...getUserByPostId(2)
     },
     reactions: getPostsReactionsById(2),
-    commentsCount: getPostsReactionsById(2).length,
+    commentsCount: countCommentsByPostId(2),
   },
 
 
 
 ];
+
+export function countCommentsByPostId(id: number): number {
+  const comments = postCommentsMock.filter(p => p.post_id === id);
+  return comments.length
+}
 
 
 export function getPostsReactionsById(id: number): { reaction_id: number ,user_id: number }[] {
