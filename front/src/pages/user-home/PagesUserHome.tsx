@@ -1,5 +1,8 @@
 import React from 'react'
-import { postsMock } from '../../mocks/posts-mock'
+import { dictReactionMock } from '../../mocks/dict-reactions-mock'
+import { PostResponseMock } from '../../mocks/post-response-mock'
+import { DictReaction } from '../../models/DIctReaction'
+import { PostResponse } from '../../responses/PostResponse'
 
 export default function PagesUserHome() {
 
@@ -20,19 +23,31 @@ export default function PagesUserHome() {
         <div className='mt-3'>
           <h3>Your friends' posts</h3>
           {
-            postsMock.map(( item: any) => {
+            PostResponseMock.map(( post: PostResponse) => {
               return(
-                <div key={item.id} className="card mb-3">
+                <div key={post.id} className="card mb-3">
                   <div className="card-header">
-                    User id: { item.userId }
+                    User id: { post.user.id }, name: { `${post.user.firstname} ${post.user.lastname}` }
                   </div>
                   <div className="card-body">
-                    <p className="card-text"> {item.content} </p>
-                    <a href="#" className="btn btn-primary mx-1">Reaction1</a>
-                    <a href="#" className="btn btn-primary mx-1">Reaction2</a>
+                    <p className="card-text"> {post.content} </p>
                   </div>
                   <div className="card-footer text-muted">
-                    Date example: 2 days ago
+                    {
+                      dictReactionMock.map( (reaction: DictReaction, i: number) => {
+                        return(
+                          <a href="#" className="btn btn-outline-primary btn-sm mx-1">{reaction.name}</a>
+                        )
+                      })
+                    }
+                  </div>
+                  <div className="card-footer text-muted">
+                    <div>
+                      { post.created_at.toDateString() }
+                    </div>
+                    <div>
+                      <a href="#" style={{textDecoration: "none"}}> Pokaż Komentarze: ({post.commentsCount}) </a>
+                    </div>
                   </div>
                 </div>
               )
