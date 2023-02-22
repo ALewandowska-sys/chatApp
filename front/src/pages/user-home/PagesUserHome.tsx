@@ -1,10 +1,27 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { dictReactionMock } from '../../mocks/dict-reactions-mock'
 import { PostResponseMock } from '../../mocks/post-response-mock'
 import { DictReaction } from '../../models/DIctReaction'
 import { PostResponse } from '../../responses/PostResponse'
 
 export default function PagesUserHome() {
+
+  const [Posts, setPosts] = useState<PostResponse[]>([]);
+
+  useEffect(() => {
+    setPosts([...PostResponseMock]);
+  }, []);
+
+  const addReaction = (postId: number, reactionId: number) => {
+
+    const posts = [...Posts];
+    posts.find(p => p.id === postId)!.reactions.push({
+      reaction_id: reactionId,
+      user_id: 1,
+    })
+
+    setPosts(posts);
+  }
 
   return (
     <div className='container mt-5'>
@@ -23,7 +40,7 @@ export default function PagesUserHome() {
         <div className='mt-3'>
           <h3>Your friends' posts</h3>
           {
-            PostResponseMock.map(( post: PostResponse) => {
+            Posts.map(( post: PostResponse) => {
               return(
                 <div key={post.id} className="card mb-3">
                   <div className="card-header">
@@ -36,7 +53,7 @@ export default function PagesUserHome() {
                     {
                       dictReactionMock.map( (reaction: DictReaction, i: number) => {
                         return(
-                          <a href="#" className="btn btn-outline-primary btn-sm mx-1">{reaction.name}</a>
+                          <a href="#" className="btn btn-outline-primary btn-sm mx-1" onClick={() => addReaction(post.id, reaction.id)}>{reaction.name}</a>
                         )
                       })
                     }

@@ -5,15 +5,15 @@ import { postsReactionsMock } from "./posts-reactions-mock";
 import { usersMock } from "./users-mock";
 
 export const PostResponseMock: PostResponse[] = [
-  {
-    id: 1,
-    ...getPostById(1),
-    user: {
-      ...getUserByPostId(1)
-    },
-    reactions: getPostsReactionsById(1),
-    commentsCount: countCommentsByPostId(1),
-  },
+  // {
+  //   id: 1,
+  //   ...getPostById(1),
+  //   user: {
+  //     ...getUserByPostId(1)
+  //   },
+  //   reactions: getPostsReactionsById(1),
+  //   commentsCount: countCommentsByPostId(1),
+  // },
   {
     id: 2,
     ...getPostById(2),
@@ -23,7 +23,15 @@ export const PostResponseMock: PostResponse[] = [
     reactions: getPostsReactionsById(2),
     commentsCount: countCommentsByPostId(2),
   },
-
+  {
+    id: 3,
+    ...getPostById(3),
+    user: {
+      ...getUserByPostId(3)
+    },
+    reactions: getPostsReactionsById(3),
+    commentsCount: countCommentsByPostId(3),
+  },
 
 
 ];
