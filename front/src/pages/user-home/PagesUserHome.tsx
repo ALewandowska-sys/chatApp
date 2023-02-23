@@ -3,7 +3,8 @@ import { loggedUser } from '../../identity/LoggedUser'
 import { dictReactionMock } from '../../mocks/dict-reactions-mock'
 import { PostResponseMock } from '../../mocks/post-response-mock'
 import { DictReaction } from '../../models/DIctReaction'
-import { PostResponse } from '../../responses/PostResponse'
+import { PostCommentResponse, PostResponse } from '../../responses/PostResponse'
+import { getPostComments } from './PagesUserHomeManager'
 
 export default function PagesUserHome() {
 
@@ -20,19 +21,18 @@ export default function PagesUserHome() {
 
     const isAdded = reactions.find(r => r.user_id === loggedUser.id);
     if(isAdded) {
-      if(isAdded.reaction_id === reactionId) {
-        const isAddedIndex = reactions.findIndex(r => r.user_id === loggedUser.id)!;
-        reactions.splice(isAddedIndex, 1);
-      } else {
-        const isAddedIndex = reactions.findIndex(r => r.user_id === loggedUser.id)!;
-        reactions.splice(isAddedIndex, 1);
+      const isAddedIndex = reactions.findIndex(r => r.user_id === loggedUser.id)!;
+      reactions.splice(isAddedIndex, 1);
 
+      if(isAdded.reaction_id !== reactionId) {
         reactions.push({
           reaction_id: reactionId,
           user_id: loggedUser.id,
         });
       }
+
     } else {
+
       reactions.push({
         reaction_id: reactionId,
         user_id: loggedUser.id,
@@ -41,7 +41,6 @@ export default function PagesUserHome() {
 
     setPosts(posts);
     return;
-
   }
 
   const isMyReaction = (postId: number, reactionId: number): string => {
@@ -54,6 +53,13 @@ export default function PagesUserHome() {
     }
 
     return "rgba(255, 255, 255, 0.1) ";
+  }
+
+  const showComments = (postId: number) => {
+    const comments: PostCommentResponse[] = getPostComments(postId);
+    const posts = [...Posts];
+    posts.find(p => p.id === postId)!.comments = comments;
+    setPosts(posts);
   }
 
   return (
@@ -77,7 +83,7 @@ export default function PagesUserHome() {
               return(
                 <div key={post.id} className="card mb-3">
                   <div className="card-header">
-                    User id: { post.user.id }, name: { `${post.user.firstname} ${post.user.lastname}` }
+                    user: { `${post.user.firstname} ${post.user.lastname}` } User id: { post.user.id }
                   </div>
                   <div className="card-body">
                     <p className="card-text"> {post.content} </p>
@@ -96,12 +102,39 @@ export default function PagesUserHome() {
                       Reactions: { post.reactions.length }
                     </div>
                     <div>
-                      <a style={{textDecoration: "none"}}> Pokaż Komentarze: ({post.commentsCount}) </a>
-                    </div>
-                    <div>
                       { post.created_at.toDateString() }
                     </div>
+                    <div>
+                      <a onClick={() => showComments(post.id)}> Pokaż Komentarze: ({post.commentsCount}) </a>
+                    </div>
                   </div>
+
+                  {
+                    post.comments && post.comments?.length > 0 &&
+                      <div className='card m-3 p-4'>
+                        <h3>Comments</h3>
+                        {
+                          post.comments?.map( (comment: PostCommentResponse, i2: number) => {
+                            return (
+                              <div className='card'>
+                                <div className="card-body">
+                                <div className="card-header">
+                                  user: { `${comment.user.firstname} ${comment.user.lastname}` } User id: { comment.user.id }
+                                </div>
+                                <div className="card-body">
+                                  { comment.content }
+                                </div>
+                                <div className="card-footer">
+                                  { comment.created_at.toDateString() }
+                                </div>
+                              </div>
+                              </div>
+                            )
+                          })
+                        }
+                      </div>
+                  }
+
                 </div>
               )
             })

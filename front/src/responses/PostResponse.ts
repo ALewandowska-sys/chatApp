@@ -12,12 +12,20 @@ export interface PostResponse {
     user_id: number;
   }[];
   commentsCount: number;
-  comments?: {
-    id: number;
-    content: string;
-    user_id: number;
-    created_at: Date;
-  }[]
+  comments?: PostCommentResponse[]
+}
+
+export interface PostCommentResponse {
+  id: number;
+  content: string;
+  user: PostCommentUserResponse;
+  created_at: Date;
+}
+
+export interface PostCommentUserResponse {
+  id: number;
+  firstname: string;
+  lastname: string;
 }
 
 //export interface
