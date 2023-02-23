@@ -5,15 +5,6 @@ import { postsReactionsMock } from "./posts-reactions-mock";
 import { usersMock } from "./users-mock";
 
 export const PostResponseMock: PostResponse[] = [
-  // {
-  //   id: 1,
-  //   ...getPostById(1),
-  //   user: {
-  //     ...getUserByPostId(1)
-  //   },
-  //   reactions: getPostsReactionsById(1),
-  //   commentsCount: countCommentsByPostId(1),
-  // },
   {
     id: 2,
     ...getPostById(2),

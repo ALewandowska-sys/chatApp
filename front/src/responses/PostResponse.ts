@@ -27,5 +27,3 @@ export interface PostCommentUserResponse {
   firstname: string;
   lastname: string;
 }
-
-//export interface
