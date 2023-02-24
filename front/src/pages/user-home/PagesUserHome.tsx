@@ -6,13 +6,47 @@ import { DictReaction } from '../../models/DIctReaction'
 import { PostCommentResponse, PostResponse } from '../../responses/PostResponse'
 import { getPostComments } from './PagesUserHomeManager'
 
+interface IToggledComment {
+  postId: number;
+  toggle: boolean;
+}
+
 export default function PagesUserHome() {
 
   const [Posts, setPosts] = useState<PostResponse[]>([]);
+  const [ToggledComments, setToggledComments] = useState<IToggledComment[]>([]);
 
   useEffect(() => {
     setPosts([...PostResponseMock]);
   }, []);
+
+  const togglePost = (postId: number) => {
+    const newToggledComments = [...ToggledComments];
+    const commentShowed = newToggledComments.find(t => t.postId === postId);
+
+    if(commentShowed) {
+      commentShowed.toggle = !commentShowed.toggle;
+      setToggledComments(newToggledComments);
+    } else {
+      newToggledComments.push({postId, toggle: true})
+      setToggledComments(newToggledComments);
+    }
+
+  }
+
+  const getToggledComment = (postId: number): boolean => {
+    const commentShowed: IToggledComment | undefined = ToggledComments.find(t => t.postId === postId);
+    if(commentShowed === undefined) {
+      return false;
+    }
+
+    return commentShowed.toggle
+  }
+
+  const alreadyLoadedComments = (postId: number): boolean => {
+    const commentShowed: IToggledComment | undefined = ToggledComments.find(t => t.postId === postId);
+    return commentShowed !== undefined;
+  }
 
   const addReaction = (postId: number, reactionId: number) => {
 
@@ -56,10 +90,17 @@ export default function PagesUserHome() {
   }
 
   const showComments = (postId: number) => {
+    if(alreadyLoadedComments(postId)) {
+      togglePost(postId);
+      return;
+    }
+
     const comments: PostCommentResponse[] = getPostComments(postId);
     const posts = [...Posts];
     posts.find(p => p.id === postId)!.comments = comments;
+    togglePost(postId);
     setPosts(posts);
+
   }
 
   return (
@@ -81,7 +122,7 @@ export default function PagesUserHome() {
           {
             Posts.map(( post: PostResponse) => {
               return(
-                <div key={post.id} className="card mb-3">
+                <div key={post.id} className="card mb-4">
                   <div className="card-header">
                     user: { `${post.user.firstname} ${post.user.lastname}` } User id: { post.user.id }
                   </div>
@@ -97,35 +138,32 @@ export default function PagesUserHome() {
                       })
                     }
                   </div>
-                  <div className="card-footer text-muted">
-                    <div>
-                      Reactions: { post.reactions.length }
-                    </div>
-                    <div>
-                      { post.created_at.toDateString() }
-                    </div>
-                    <div>
+                  <div className="card-footer text-muted d-flex">
+                    <div className='mx-2'>
                       <a onClick={() => showComments(post.id)}> Pokaż Komentarze: ({post.commentsCount}) </a>
+                    </div>
+                    <div className='mx-2'>
+                      Reactions: ({ post.reactions.length })
+                    </div>
+                    <div className='mx-2'>
+                      { post.created_at.toDateString() }
                     </div>
                   </div>
 
                   {
-                    post.comments && post.comments?.length > 0 &&
+                    post.comments && post.comments?.length > 0 && getToggledComment(post.id) &&
                       <div className='card m-3 p-4'>
-                        <h3>Comments</h3>
+                        <h3 className='px-3'>Comments</h3>
                         {
                           post.comments?.map( (comment: PostCommentResponse, i2: number) => {
                             return (
-                              <div className='card'>
+                              <div className='card mb-2'>
                                 <div className="card-body">
                                 <div className="card-header">
-                                  user: { `${comment.user.firstname} ${comment.user.lastname}` } User id: { comment.user.id }
+                                  user: { `${comment.user.firstname} ${comment.user.lastname}` } User id: { comment.user.id }, { comment.created_at.toDateString() }
                                 </div>
                                 <div className="card-body">
                                   { comment.content }
-                                </div>
-                                <div className="card-footer">
-                                  { comment.created_at.toDateString() }
                                 </div>
                               </div>
                               </div>
@@ -134,6 +172,11 @@ export default function PagesUserHome() {
                         }
                       </div>
                   }
+
+                  <div className="card-footer d-flex">
+                    <textarea className="form-control" id="exampleFormControlTextarea1" placeholder='Comment..' rows={1} ></textarea>
+                    <input type='button' className="btn btn-primary mx-2" value='Add Comment' />
+                  </div>
 
                 </div>
               )
