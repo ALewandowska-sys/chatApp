@@ -1,4 +1,4 @@
-package com.spring.chat.user;
+package com.spring.chat.example;
 
 import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
@@ -10,10 +10,6 @@ public class UserController {
 
     public UserController(UserService userService) {
         this.userService = userService;
-    }
-    @GetMapping("/testRepo")
-    public String testRepo(){
-        return userService.testRepo();
     }
 
     @GetMapping

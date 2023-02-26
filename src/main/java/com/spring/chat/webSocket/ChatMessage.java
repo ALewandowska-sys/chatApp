@@ -1,6 +1,6 @@
 package com.spring.chat.webSocket;
 
-import com.spring.chat.user.User;
+import com.spring.chat.example.User;
 
 public class ChatMessage {
     private String value;
