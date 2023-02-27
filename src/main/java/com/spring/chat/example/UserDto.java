@@ -1,20 +1,10 @@
-package com.spring.chat.user;
+package com.spring.chat.example;
 
-import java.util.Set;
 
 public class UserDto {
     private Long id;
     private String username;
     private String password;
-    private Set<FriendDto> favourite;
-
-    public UserDto(Long id, String username, String password, Set<FriendDto> favourite) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.favourite = favourite;
-    }
-    public UserDto(){}
 
     public Long getId() {
         return id;
@@ -37,13 +27,5 @@ public class UserDto {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Set<FriendDto> getFavourite() {
-        return favourite;
-    }
-
-    public void setFavourite(Set<FriendDto> favourite) {
-        this.favourite = favourite;
     }
 }

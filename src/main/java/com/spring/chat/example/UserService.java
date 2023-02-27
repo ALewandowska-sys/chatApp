@@ -1,4 +1,4 @@
-package com.spring.chat.user;
+package com.spring.chat.example;
 
 import org.mapstruct.factory.Mappers;
 import org.springframework.data.domain.Page;
@@ -63,9 +63,5 @@ public class UserService {
     public Page<UserDto> getUsers() {
         Pageable pageable = PageRequest.of(0, 5, Sort.by("username"));
         return userRepo.findAll(pageable).map(userMapper::toUserDto);
-    }
-
-    public String testRepo() {
-        return userRepo.findAll().toString();
     }
 }
