@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Navbar.css"
 
 export default function Navbar() {
 	return (
@@ -23,7 +24,7 @@ export default function Navbar() {
 				<div className="collapse navbar-collapse" id="navbarSupportedContent">
 					<ul className="navbar-nav ms-auto">
 						<li className="nav-item">
-							<Link className="nav-link" to={"/login"}>
+							<Link className="nav-link" to={"/login"} >
 								Zaloguj
 							</Link>
 						</li>
@@ -32,7 +33,7 @@ export default function Navbar() {
 								Zarejestruj
 							</Link>
 						</li>
-						<li className="nav-item">
+						<li className="nav-item d-none">
 							<Link className="nav-link" to={"/logout"}>
 								Wyloguj
 							</Link>
