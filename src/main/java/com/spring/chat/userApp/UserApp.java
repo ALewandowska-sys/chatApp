@@ -1,35 +1,36 @@
-package com.spring.chat.example;
+package com.spring.chat.userApp;
 
 import io.swagger.annotations.ApiModel;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-
-import javax.persistence.Entity;
+import java.sql.Timestamp;
 
 @ApiModel
 @Entity
-@Table(name="example")
-public class User {
+@Table(name="user_app")
+public class UserApp {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String username;
+    @Column(nullable = false)
     private String password;
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private Timestamp createdAt;
 
-    public User(Long id, String username, String password) {
+    public UserApp(Long id, String username, String password) {
         this.id = id;
         this.username = username;
         this.password = password;
     }
-    public User(){}
+
+    public UserApp(){}
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getUsername() {
@@ -38,6 +39,10 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
     public String getPassword() {
