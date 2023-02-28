@@ -3,25 +3,27 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
 
-    <changeSet id="01_18_create_example_table" author="alewandowska">
+    <changeSet id="28_2055_create_user_app_table" author="alewandowska">
         <preConditions onFail="MARK_RAN">
             <not>
-                <tableExists tableName="example"/>
+                <tableExists tableName="user_app"/>
             </not>
         </preConditions>
-        <createTable tableName="example">
+        <createTable tableName="user_app">
             <column name="id" type="bigint">
                 <constraints primaryKey="true" unique="true"/>  </column>
             <column name="username" type="varchar(100)">
                 <constraints nullable="false"/>                 </column>
             <column name="password" type="varchar(100)">
                 <constraints nullable="false"/>                 </column>
+            <column name="created_at" type="timestamp" defaultValue="NOW()"/>
         </createTable>
     </changeSet>
 
-    <changeSet id="01_20_update_example_table_add_autoincrement" author="alewandowska">
-        <addAutoIncrement tableName="example"
+    <changeSet id="28_2056_update_user_app_table_add_autoincrement" author="alewandowska">
+        <addAutoIncrement tableName="user_app"
                           columnDataType="bigint"
                           columnName="id"/>
     </changeSet>
+
 </databaseChangeLog>

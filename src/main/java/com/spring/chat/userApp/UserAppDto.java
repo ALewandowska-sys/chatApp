@@ -1,10 +1,13 @@
-package com.spring.chat.example;
+package com.spring.chat.userApp;
 
 
-public class UserDto {
+import java.sql.Timestamp;
+
+public class UserAppDto {
     private Long id;
     private String username;
     private String password;
+    private Timestamp createdAt;
 
     public Long getId() {
         return id;
@@ -27,5 +30,13 @@ public class UserDto {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
     }
 }
