@@ -12,7 +12,8 @@ export interface PostResponse {
     user_id: number;
   }[];
   commentsCount: number;
-  comments?: PostCommentResponse[]
+  comments?: PostCommentResponse[],
+  comment: string;
 }
 
 export interface PostCommentResponse {

@@ -13,6 +13,7 @@ export const PostResponseMock: PostResponse[] = [
     },
     reactions: getPostsReactionsById(2),
     commentsCount: countCommentsByPostId(2),
+    comment: '',
   },
   {
     id: 3,
@@ -22,6 +23,7 @@ export const PostResponseMock: PostResponse[] = [
     },
     reactions: getPostsReactionsById(3),
     commentsCount: countCommentsByPostId(3),
+    comment: '',
   },
 
 
