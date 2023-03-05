@@ -4,6 +4,7 @@ import { dictReactionMock } from '../../mocks/dict-reactions-mock'
 import { PostResponseMock } from '../../mocks/post-response-mock'
 import { DictReaction } from '../../models/DIctReaction'
 import { PostCommentResponse, PostResponse } from '../../responses/PostResponse'
+import { getRandomNumber } from '../../utils/utils.random'
 import { getPostComments } from './PagesUserHomeManager'
 
 interface IToggledComment {
@@ -89,7 +90,7 @@ export default function PagesUserHome() {
     return "rgba(255, 255, 255, 0.1) ";
   }
 
-  const showComments = (postId: number) => {
+  const handleShowComments = (postId: number) => {
     if(alreadyLoadedComments(postId)) {
       togglePost(postId);
       return;
@@ -97,10 +98,44 @@ export default function PagesUserHome() {
 
     const comments: PostCommentResponse[] = getPostComments(postId);
     const posts = [...Posts];
-    posts.find(p => p.id === postId)!.comments = comments;
+    
+    const post = posts.find(p => p.id === postId)!;
+    if(!post.comments) {
+      post.comments = comments;
+    } else {
+      post.comments = [...post.comments, ...comments];
+    }
+
     togglePost(postId);
     setPosts(posts);
 
+  }
+
+  const handleSetTextComment = (postId: number, text: any): void => {
+    const posts = [...Posts];
+    let founded = posts.find(p => p.id === postId)!;
+    founded.comment = text.target.value;
+
+    setPosts(posts);
+  }
+
+  const handleAddComment = (postId: number) => {
+
+    const posts = [...Posts];
+    let founded = posts.find(p => p.id === postId)!;
+    if(!founded.comments) {
+      founded.comments = [];
+    }
+    founded.commentsCount++;
+    founded.comment = '';
+    founded.comments.push({
+      id: getRandomNumber(100, 1000),
+      content: founded.comment,
+      created_at: new Date(),
+      user: loggedUser,
+    });
+
+    setPosts(posts);
   }
 
   return (
@@ -133,14 +168,16 @@ export default function PagesUserHome() {
                     {
                       dictReactionMock.map( (reaction: DictReaction, i: number) => {
                         return(
-                          <a key={i} className="btn btn-outline-primary btn-sm mx-1" style={{ backgroundColor: isMyReaction(post.id, reaction.id) }}   onClick={() => addReaction(post.id, reaction.id)}>{reaction.name}</a>
+                          <button key={i} className="btn btn-outline-primary btn-sm mx-1" style={{ backgroundColor: isMyReaction(post.id, reaction.id) }}   onClick={() => addReaction(post.id, reaction.id)}>
+                            {reaction.name}
+                          </button>
                         )
                       })
                     }
                   </div>
                   <div className="card-footer text-muted d-flex">
                     <div className='mx-2'>
-                      <a onClick={() => showComments(post.id)}> Pokaż Komentarze: ({post.commentsCount}) </a>
+                      <span onClick={() => handleShowComments(post.id)}> Pokaż Komentarze: ({post.commentsCount}) </span>
                     </div>
                     <div className='mx-2'>
                       Reactions: ({ post.reactions.length })
@@ -157,7 +194,7 @@ export default function PagesUserHome() {
                         {
                           post.comments?.map( (comment: PostCommentResponse, i2: number) => {
                             return (
-                              <div className='card mb-2'>
+                              <div key={i2} className='card mb-2'>
                                 <div className="card-body">
                                 <div className="card-header">
                                   user: { `${comment.user.firstname} ${comment.user.lastname}` } User id: { comment.user.id }, { comment.created_at.toDateString() }
@@ -174,8 +211,9 @@ export default function PagesUserHome() {
                   }
 
                   <div className="card-footer d-flex">
-                    <textarea className="form-control" id="exampleFormControlTextarea1" placeholder='Comment..' rows={1} ></textarea>
-                    <input type='button' className="btn btn-primary mx-2" value='Add Comment' />
+                    <textarea className="form-control" onChange={(text) => handleSetTextComment(post.id, text) } id="exampleFormControlTextarea1" placeholder='Comment..' value={post.comment} rows={1}>
+                    </textarea>
+                    <input type='button' className="btn btn-primary mx-2" value='Add Comment' onClick={() => handleAddComment(post.id)} />
                   </div>
 
                 </div>
