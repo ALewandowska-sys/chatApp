@@ -1,0 +1,41 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	padding: 20px;
+	color: #fefefe;
+
+	.form-wrapper {
+		padding: 10px 20px;
+		border-radius: 6px;
+		-webkit-box-shadow: 0px 0px 3px 0px rgb(22, 165, 58);
+		-moz-box-shadow: 0px 0px 3px 0px rgb(22, 165, 58);
+		box-shadow: 0px 0px 3px 0px rgb(22, 165, 58);
+
+		h2 {
+			margin-top: 10px;
+			color: rgb(22, 165, 58);
+		}
+
+		input {
+			margin: 5px;
+			padding: 5px;
+			border: 1px solid #d6d1d5;
+			border-radius: 5px;
+			text-align: center;
+		}
+
+		button {
+			cursor: pointer;
+			margin-top: 10px;
+			padding: 10px 20px;
+			border: none;
+			border-radius: 4px;
+			font-weight: bold;
+			color: #fefefe;
+			background-color: rgb(22, 165, 58);
+		}
+	}
+}
