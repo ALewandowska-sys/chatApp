@@ -16,6 +16,7 @@ export default function PagesUserHome() {
 
   const [Posts, setPosts] = useState<PostResponse[]>([]);
   const [ToggledComments, setToggledComments] = useState<IToggledComment[]>([]);
+  const [NewPostText, setNewPostText] = useState<string>('');
 
   useEffect(() => {
     setPosts([...PostResponseMock]);
@@ -119,6 +120,10 @@ export default function PagesUserHome() {
     setPosts(posts);
   }
 
+  const handleSetTextPost = (text: any): void => {
+    setNewPostText(text.target.value);
+  } 
+
   const handleAddComment = (postId: number) => {
 
     const posts = [...Posts];
@@ -126,8 +131,7 @@ export default function PagesUserHome() {
     if(!founded.comments) {
       founded.comments = [];
     }
-    founded.commentsCount++;
-    founded.comment = '';
+
     founded.comments.push({
       id: getRandomNumber(100, 1000),
       content: founded.comment,
@@ -135,7 +139,24 @@ export default function PagesUserHome() {
       user: loggedUser,
     });
 
+    founded.commentsCount++;
+    founded.comment = '';
     setPosts(posts);
+  }
+
+  const handleAddPost = () => {
+    const posts = [...Posts];
+    posts.unshift({
+      id: getRandomNumber(100, 1000),
+      comment: '',
+      commentsCount: 0,
+      content: NewPostText,
+      created_at: new Date(),
+      reactions: [],
+      user: loggedUser,
+    })
+    setPosts(posts);
+    setNewPostText('');
   }
 
   return (
@@ -146,8 +167,9 @@ export default function PagesUserHome() {
           <h4>
             <label htmlFor="exampleFormControlTextarea1" className="form-label px-2">Write a post</label>
           </h4>
-          <textarea className="form-control" id="exampleFormControlTextarea1" placeholder='Tell us how you doing?' rows={3}></textarea>
-          <input type='button' className="btn btn-primary mt-2" value='Send' />
+          <textarea className="form-control" id="exampleFormControlTextarea1"
+            onChange={(text) => handleSetTextPost(text) } placeholder='Tell us how you doing?' rows={3}></textarea>
+          <input type='button' className="btn btn-primary mt-2" value='Publish' onClick={handleAddPost} />
         </div>
 
       </div>
