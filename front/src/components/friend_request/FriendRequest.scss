@@ -1,0 +1,67 @@
+body{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100vh;
+	background-color: grey;
+}
+
+
+.friend-request-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 6px;
+	-webkit-box-shadow: 0px 0px 3px 0px rgb(22, 165, 58);
+	-moz-box-shadow: 0px 0px 3px 0px rgb(22, 165, 58);
+	box-shadow: 0px 0px 3px 0px rgb(22, 165, 58);
+	margin-bottom: 20px;
+
+  
+	.friend-request-text {
+	  font-weight: bold;
+	  margin-right: 10px;
+	  font-size: 18px;
+	  margin-bottom: 20px;
+	}
+  
+	.friend-request-avatar {
+	  width: 60px;
+	  height: 60px;
+	  border-radius: 50%;
+	  margin-right: 10px;
+	  margin-bottom: 20px;
+	}
+  
+	p {
+	  font-size: 16px;
+	  margin: 0;
+	  margin-bottom: 20px;
+	}
+  
+	.friend-request-buttons {
+	  display: flex;
+	  align-items: center;
+  
+	  .friend-request-accept, .friend-request-reject {
+		background-color: rgb(22, 165, 58);
+		color: white;
+		padding: 8px 16px;
+		border: none;
+		border-radius: 5px;
+		margin-right: 5px;
+		cursor: pointer;
+		font-size: 16px;
+  
+		&:hover {
+			background-color: rgba(22, 165, 58, 0.785);
+		}
+	  }
+
+	}
+  }
+  
+  
