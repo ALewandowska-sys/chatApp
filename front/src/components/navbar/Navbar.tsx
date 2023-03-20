@@ -1,6 +1,6 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import "./Navbar.scss";
+import Login from "../login/Login";
 
 export default function Navbar() {
 	return (
@@ -8,9 +8,9 @@ export default function Navbar() {
 			<Link className="navbar-logo" to={"/myhome"}>
 				Logo
 			</Link>
-			<Link className="navbar-login" to={"/login"}>
-				Zaloguj się
-			</Link>
+			<Login />
 		</nav>
 	);
 }
+
+

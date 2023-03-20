@@ -2,13 +2,6 @@ import "./RegistrationPage.scss";
 import { useForm } from "react-hook-form";
 
 export default function RegistrationPage() {
-	type Inputs = {
-		username: string;
-		email: string;
-		password: string;
-		password2: string;
-	};
-
 	const {
 		register,
 		watch,
@@ -24,8 +17,8 @@ export default function RegistrationPage() {
 	});
 
 	const errorStyles = {
-		color: "grey"
-	}
+		color: "grey",
+	};
 
 	return (
 		<div className="wrapper">
