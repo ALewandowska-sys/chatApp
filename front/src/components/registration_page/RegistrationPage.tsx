@@ -75,7 +75,7 @@ export default function RegistrationPage() {
 							{...register("password2", {
 								required: "Powtórz hasło",
 								validate: (value: string) => {
-									if (watch("password") != value) {
+									if (watch("password") !== value) {
 										return "Hasła nie są takie same";
 									}
 								},

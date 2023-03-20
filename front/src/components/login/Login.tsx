@@ -28,7 +28,7 @@ export default function Login() {
 			onSubmit={handleSubmit((data, e) => {
 				e?.preventDefault();
 				console.log(data);
-				navigate("/mainpage");
+				navigate("/myhome");
 			})}
 			className="formLogin"
 		>
