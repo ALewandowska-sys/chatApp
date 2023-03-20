@@ -1,34 +1,68 @@
 import React from "react";
-import { useState } from "react";
-import { Link } from "react-router-dom";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+
+import "./Login.scss";
 
 export default function Login() {
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
+	const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	} = useForm({
+		defaultValues: {
+			email: "",
+			password: "",
+		},
+	});
 
+	const navigate = useNavigate();
+
+	const errorStyles = {
+		color: "#fefefe",
+	};
 
 	return (
-		<form>
-			<div className="inputsContainer">
-				<input
-					type="email"
-					placeholder="E-mail"
-					value={email}
-					autoFocus
-					onChange={(e) => setEmail(e.target.value)}
-				/>
-
-				<input
-					type="password"
-					placeholder="Hasło"
-					value={password}
-					onChange={(e) => setPassword(e.target.value)}
-				/>
+		
+		<form
+			onSubmit={handleSubmit((data, e) => {
+				e?.preventDefault();
+				console.log(data);
+				navigate("/mainpage");
+			})}
+			className="formLogin"
+		>
+			<div className="formLogin__inputs">
+				<div className="formLogin__inputs--input">
+					<input
+						{...register("email", {
+							required: "Podaj e-mail",
+							pattern: {
+								value: /\S+@\S+\.\S+/,
+								message: "Zły format",
+							},
+						})}
+						placeholder="E-mail"
+						type="email"
+						className="email"
+					/>
+					<p style={errorStyles}>{errors.email?.message}</p>
+				</div>
+				<div className="formLogin__inputs--input">
+					<input
+						{...register("password", {
+							required: "Podaj hasło",
+						})}
+						type="password"
+						placeholder="Hasło"
+						className="password"
+					/>
+					<p style={errorStyles}>{errors.password?.message}</p>
+				</div>
 			</div>
-			<Link className="navbar-login" to={"/mainpage"}>
+			<button type="submit" className="formLogin__btn">
 				Zaloguj się
-			</Link>
+			</button>
 		</form>
 	);
 }
