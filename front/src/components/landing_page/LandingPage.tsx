@@ -1,12 +1,10 @@
 import React from "react";
 import RegistrationPage from "../registration_page/RegistrationPage";
-import Navbar from "../navbar/Navbar";
 import "./LandingPage.scss";
 
 export default function LandingPage() {
 	return (
 		<div>
-			<Navbar />
 			<div className="landingPage">
 				<header>
 					<h1>Epuls</h1>
