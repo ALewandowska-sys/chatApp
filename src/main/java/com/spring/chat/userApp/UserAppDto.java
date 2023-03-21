@@ -9,6 +9,15 @@ public class UserAppDto {
     private String password;
     private Timestamp createdAt;
 
+    public UserAppDto() {}
+
+    public UserAppDto(Long id, String username, String password, Timestamp createdAt) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.createdAt = createdAt;
+    }
+
     public Long getId() {
         return id;
     }
