@@ -1,4 +1,4 @@
-package com.spring.chat.swagger;
+package com.spring.chat.config.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
