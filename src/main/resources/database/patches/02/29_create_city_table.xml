@@ -1,0 +1,33 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="29_1000_create_dict_city_table" author="alewandowska">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="dict_city"/>
+            </not>
+        </preConditions>
+        <createTable tableName="dict_city">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" unique="true"/>  </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>   </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="29_1010_update_dict_city_table_add_autoincrement" author="alewandowska">
+        <addAutoIncrement tableName="dict_city"
+                          columnDataType="bigint"
+                          columnName="id"/>
+    </changeSet>
+
+    <changeSet id="29_1015_update_dict_city_table_load_data" author="alewandowska">
+        <loadUpdateData tableName="dict_city" file="database/loadData/city.csv" primaryKey="id">
+            <column name="id" type="bigint"/>
+            <column name="name" type="varchar(50)"/>
+        </loadUpdateData>
+    </changeSet>
+
+</databaseChangeLog>

@@ -1,9 +1,8 @@
 package com.spring.chat.userApp;
 
+import com.spring.chat.generic.AbstractMapper;
 import org.mapstruct.Mapper;
 
 @Mapper
-public interface UserAppMapper {
-    UserApp toUserAppEntity(UserAppDto userAppDto);
-    UserAppDto toUserAppDto(UserApp userApp);
+public interface UserAppMapper extends AbstractMapper<UserApp, UserAppDto> {
 }

@@ -1,0 +1,46 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="29_1200_create_user_profile_table" author="alewandowska">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="user_profile"/>
+            </not>
+        </preConditions>
+        <createTable tableName="user_profile">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" unique="true"/>  </column>
+            <column name="firstname" type="varchar(50)">
+                <constraints nullable="false"/>   </column>
+            <column name="lastname" type="varchar(50)">
+                <constraints nullable="false"/>   </column>
+            <column name="description" type="varchar(100)"/>
+            <column name="city_id" type="bigint"/>
+            <column name="user_app_id" type="bigint"/>
+            <column name="birth_date" type="date"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="29_1210_update_user_profile_table_add_autoincrement" author="alewandowska">
+        <addAutoIncrement tableName="user_profile"
+                          columnDataType="bigint"
+                          columnName="id"/>
+    </changeSet>
+
+    <changeSet id="29_1220_update_user_profile_table_add_constraint" author="alewandowska">
+        <addForeignKeyConstraint baseTableName="user_profile" baseColumnNames="user_app_id" constraintName="user_profile_user_app_fk"
+                                 referencedTableName="user_app"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="user_profile" baseColumnNames="city_id" constraintName="user_profile_city_fk"
+                                 referencedTableName="city"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+    <changeSet id="29_1220_update_user_profile_table_add_not_null" author="alewandowska">
+        <addNotNullConstraint tableName="user_profile"
+                          columnDataType="bigint"
+                          columnName="user_app_id"/>
+    </changeSet>
+</databaseChangeLog>

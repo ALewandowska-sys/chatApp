@@ -1,0 +1,44 @@
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet id="07_2110_create_friend_table" author="alewandowska">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="friend"/>
+            </not>
+        </preConditions>
+        <createTable tableName="friend">
+            <column name="id" type="bigint">
+                <constraints primaryKey="true" unique="true"/>  </column>
+            <column name="category1_id" type="bigint"/>
+            <column name="category2_id" type="bigint"/>
+            <column name="user1_id" type="bigint"/>
+            <column name="user2_id" type="bigint"/>
+            <column name="accepted" type="boolean" defaultValue="false"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="07_2112_update_friend_table_add_autoincrement" author="alewandowska">
+        <addAutoIncrement tableName="friend"
+                          columnDataType="bigint"
+                          columnName="id"/>
+    </changeSet>
+
+    <changeSet id="07_2115_update_friend_table_add_constraint" author="alewandowska">
+        <addForeignKeyConstraint baseTableName="friend" baseColumnNames="user1_id" constraintName="friend_user_app_1_fk"
+                                 referencedTableName="user_app"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="friend" baseColumnNames="user2_id" constraintName="friend_user_app_2_fk"
+                                 referencedTableName="user_app"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="friend" baseColumnNames="category1_id" constraintName="friend_dict_friend_category_1_fk"
+                                 referencedTableName="dict_friend_category"
+                                 referencedColumnNames="id"/>
+        <addForeignKeyConstraint baseTableName="friend" baseColumnNames="category2_id" constraintName="friend_dict_friend_category_2_fk"
+                                 referencedTableName="dict_friend_category"
+                                 referencedColumnNames="id"/>
+    </changeSet>
+
+</databaseChangeLog>
