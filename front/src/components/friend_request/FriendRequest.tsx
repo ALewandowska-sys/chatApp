@@ -2,38 +2,54 @@ import React from 'react';
 import './FriendRequest.scss';
 
 interface FriendRequestProps {
-  username: string;
-  avatarUrl: string;
-  onAccept: () => void;
-  onReject: () => void;
+  friends: {
+    username: string;
+    avatarUrl: string;
+  }[];
+  onAccept: (username: string) => void;
+  onReject: (username: string) => void;
+  onClose: () => void;
 }
 
 const FriendRequest: React.FC<FriendRequestProps> = ({
-  username,
-  avatarUrl,
+  friends,
   onAccept,
   onReject,
+  onClose,
 }) => {
   return (
-    <div className="friend-request-container">
-      <div className="friend-request-text">
-        <p>Masz nowe zaproszenie do znajomych od użytkownika:</p>
+    <div className="friendRequestContainer">
+      <button className="friendRequestContainer__close" onClick={onClose}>
+        X
+      </button>
+        <div className="friendRequestContainer__tittle">
+          <p>Masz nowe zaproszenia do znajomych:</p>
+        </div>
+        {friends.map((friend) => (
+          <div key={friend.username}>
+            <img
+              src={friend.avatarUrl}
+              alt={`Zdjęcie użytkownika ${friend.username}`}
+              className="friendRequestContainer__avatar"
+            />
+            <p className="friendRequestContainer__username">{friend.username}</p>
+            <div className="friendRequestContainer__buttons">
+              <button
+                className="friendRequestContainer__buttons--accept"
+                onClick={() => onAccept(friend.username)}
+              >
+                Akceptuj
+              </button>
+              <button
+                className="friendRequestContainer__buttons--reject"
+                onClick={() => onReject(friend.username)}
+              >
+                Odrzuć
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
-      <img
-        src={avatarUrl}
-        alt={`Zdjęcie użytkownika ${username}`}
-        className="friend-request-avatar"
-      />
-      <p>{`${username}`}</p>
-      <div className="friend-request-buttons">
-        <button className="friend-request-accept" onClick={onAccept}>
-          Akceptuj
-        </button>
-        <button className="friend-request-reject" onClick={onReject}>
-          Odrzuć
-        </button>
-      </div>
-    </div>
   );
 };
 
