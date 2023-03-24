@@ -46,7 +46,12 @@ export default function Login() {
 						type="email"
 						className="email"
 					/>
-					<p style={errorStyles}>{errors.email?.message}</p>
+					{
+						errors.email &&
+							<p style={errorStyles}>
+								{errors.email?.message}
+							</p>
+					}
 				</div>
 				<div className="formLogin__inputs--input">
 					<input
@@ -57,7 +62,12 @@ export default function Login() {
 						placeholder="Hasło"
 						className="password"
 					/>
-					<p style={errorStyles}>{errors.password?.message}</p>
+					{
+						errors.password &&
+							<p style={errorStyles}>
+								{errors.password?.message}
+							</p>
+					}
 				</div>
 			</div>
 			<button type="submit" className="formLogin__btn">

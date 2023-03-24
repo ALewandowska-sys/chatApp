@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './FriendRequest.scss';
 
 interface FriendRequestProps {
@@ -17,6 +17,7 @@ const FriendRequest: React.FC<FriendRequestProps> = ({
   onReject,
   onClose,
 }) => {
+
   return (
     <div className="friendRequestContainer">
       <button className="friendRequestContainer__close" onClick={onClose}>

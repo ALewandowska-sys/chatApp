@@ -5,6 +5,7 @@ import PagesUserHome from "./pages/user-home/PagesUserHome";
 import LandingPage from "./components/landing_page/LandingPage";
 import Logout from "./components/navbar/Logout";
 import Navbar from "./components/navbar/Navbar";
+import "bootstrap-icons/font/bootstrap-icons.css";
 
 function App() {
 	return (
