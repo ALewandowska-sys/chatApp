@@ -16,7 +16,8 @@
             margin: 5px;
 
             .email, .password {
-                width: 70px;
+                width: 90px;
+                height: 45px;
                 border-radius: 5px;
                 text-align: center;
             }
@@ -31,7 +32,9 @@
     &__btn {
         margin-top: 5px;
         background: none;
-        border: none;
+        border: 1px solid rgb(139, 134, 134);
+        padding: 8px 14px;
+        border-radius: 10px;
         color: #fefefe;
         text-decoration: none;
     }
@@ -50,7 +53,7 @@
         &--input {
 
             .email, .password {
-                width: 150px;
+                width: 200px;
             }
 
             p {
@@ -61,7 +64,8 @@
 	}
 
     &__btn {
-        margin-top: 10px;
+        margin-top: 11px;
+        margin-left: 6px;
     }
 }
 }

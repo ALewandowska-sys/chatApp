@@ -28,8 +28,11 @@ export default function Navbar(): JSX.Element {
 
 
       <Login/>
+      <div>
+        
+      </div>
       <button className="navbar-friendsRequest" onClick={handleFriendsRequestClick}>
-        Zaproszenia do znajomych
+        <i className="bi bi-bell-fill notificationBell"></i>
       </button>
 
 
