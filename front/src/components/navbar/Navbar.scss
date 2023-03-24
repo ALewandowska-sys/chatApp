@@ -36,6 +36,7 @@ nav {
 }
 
 .navbar-friendsRequest {
+	position: relative;
 	background-color: inherit;
 	border-width: 0px;
 	margin: 0 20px;
@@ -51,6 +52,18 @@ nav {
 
 .navbar-friendsRequest:hover .bi-bell-fill::before {
 	color: #bac3ca;
+}
+
+.notificationDot {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	
+	height: 15px;
+	width: 15px;
+	background-color: rgb(233, 14, 14);
+
+	border-radius: 50%;
 }
 
 @media (min-width: 500px) {

@@ -10,14 +10,17 @@ export default function Navbar(): JSX.Element {
 
   const handleFriendsRequestClick = (): void => {
     setShowFriendsRequest(!showFriendsRequest);
-	console.log("show friends request")
-  };
+	  console.log("show friends request")
+  }
 
   const handleCloseFriendsRequest = (): void => {
     setShowFriendsRequest(false);
-	console.log("close friends request")
+	  console.log("close friends request")
+  }
 
-  };
+  const isAnyNotification = (): boolean => {
+    return showFriendsRequest;
+  }
 
   return (
     <nav>
@@ -25,16 +28,15 @@ export default function Navbar(): JSX.Element {
         Logo
       </Link>
 
-
-
       <Login/>
-      <div>
-        
-      </div>
+
       <button className="navbar-friendsRequest" onClick={handleFriendsRequestClick}>
         <i className="bi bi-bell-fill notificationBell"></i>
+        {
+          !isAnyNotification() &&
+          <div className="notificationDot"></div>
+        }
       </button>
-
 
       {showFriendsRequest && (
         <FriendsRequest
@@ -45,13 +47,12 @@ export default function Navbar(): JSX.Element {
 		  ]}
           onAccept={(username) => {console.log(`added ${username}`)}}
           onReject={(username) => {console.log(`rejected ${username}`)}}
-          onClose={handleCloseFriendsRequest} 
+          onClose={handleCloseFriendsRequest}
+          onOpen={isAnyNotification}
         />
       )}
 
-
     </nav>
-
 	
   );
 }
