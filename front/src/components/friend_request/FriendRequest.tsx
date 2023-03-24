@@ -9,7 +9,6 @@ interface FriendRequestProps {
   onAccept: (username: string) => void;
   onReject: (username: string) => void;
   onClose: () => void;
-  onOpen: () => void;
 }
 
 const FriendRequest: React.FC<FriendRequestProps> = ({
@@ -17,12 +16,7 @@ const FriendRequest: React.FC<FriendRequestProps> = ({
   onAccept,
   onReject,
   onClose,
-  onOpen,
 }) => {
-  
-  useEffect(() => {
-    onOpen();
-  }, []);
 
   return (
     <div className="friendRequestContainer">

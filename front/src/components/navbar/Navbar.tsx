@@ -48,7 +48,6 @@ export default function Navbar(): JSX.Element {
           onAccept={(username) => {console.log(`added ${username}`)}}
           onReject={(username) => {console.log(`rejected ${username}`)}}
           onClose={handleCloseFriendsRequest}
-          onOpen={isAnyNotification}
         />
       )}
 
