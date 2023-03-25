@@ -6,44 +6,59 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 30px;
 	background-color: #fff;
 	border-radius: 6px;
 	box-shadow: 0px 0px 3px 0px rgb(22, 165, 58);
 	margin-bottom: 20px;
+	z-index: 1000;
+
+	&__item {
+		display: flex;
+	}
 
 	&__close {
-		border: none;
-		font-size: 12px;
-		position: absolute;
-		top: 10px;
-		right: 10px;
-		cursor: pointer;
+    border: none;
+    position: absolute;
+    top: -15px;
+    right: 5px;
+    cursor: pointer;
+    font-size: 50px;
+    background-color: inherit;
+    color: white;
+    transform: rotate(45deg);
+    height: 0px;
+    width: 0px;
+
+		&:hover div {
+			background-color: red;
+		}
 	}
 
 	&__title {
 		font-weight: bold;
-		margin-right: 10px;
-		font-size: 16px;
-		margin-bottom: 20px;
+		margin: 18px 65px 20px 65px;
+		font-size: 18px;
+
 	}
 
 	&__username {
 		font-size: 16px;
-		text-align: center;
-		margin-top: -10px;
+		display: flex;
+		align-items: center;
+		margin: -10px 10px 0 10px;
 	}
 
 	&__avatar {
 		width: 60px;
 		height: 60px;
 		border-radius: 50%;
-		margin: 20px calc(50% - 30px);
+		margin: 10px;
 	}
 
 	&__buttons {
 		display: flex;
 		align-items: center;
+		
 
 		&--accept, &--reject {
 			background-color: rgb(22, 165, 58);
@@ -51,7 +66,7 @@
 			padding: 8px 16px;
 			border: none;
 			border-radius: 5px;
-			margin-right: 5px;
+			margin-left: 15px;
 			margin-bottom: 15px;
 			cursor: pointer;
 			font-size: 16px;
