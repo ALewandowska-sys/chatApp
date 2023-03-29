@@ -1,0 +1,121 @@
+.userProfile {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 580px;
+  height: 380px;
+  padding: 20px;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 6px;
+  -webkit-box-shadow: 0px 0px 3px 0px rgb(22, 165, 58);
+  -moz-box-shadow: 0px 0px 3px 0px rgb(22, 165, 58);
+  box-shadow: 0px 0px 3px 0px rgb(22, 165, 58);
+
+
+  &__avatar {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    font-weight: bold;
+    width: 100%;
+
+    &--login {
+      font-size: 24px;
+      margin-top: 60px;
+    }
+  
+    &--list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+  }
+
+
+
+  &__buttons {
+    font-size: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-self: center; 
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+
+    &--addFriend, &--viewFriendsList{
+      border: none;
+      margin: 2px;
+			border-radius: 4px;
+			font-weight: bold;
+			color: #fefefe;
+			background-color: rgb(22, 165, 58);
+    }
+  }
+
+}
+
+
+@media (max-width: 768px) {
+  .userProfile {
+    display: flex;
+    justify-content: center; 
+    text-align: center; 
+    align-items: center;
+    height: 900px;
+    width: 500px;
+    flex-direction: column;
+
+    &__avatar {
+      width: 400px;
+      height: 400px;
+    }
+
+    &__info{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center; 
+
+      &--login{
+        font-size: 48px;
+        text-align: center;
+        margin-bottom: 20px;     
+      }
+
+      &--list{
+        align-self: flex-start;
+        text-align: left;
+        font-size: 24px;
+        justify-content: right; 
+
+      }
+    }
+
+    &__buttons{
+      margin: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &--addFriend, &--viewFriendsList{
+        margin: 10px;
+        justify-content: center;
+        height: 80px;
+        width: 600px;
+        font-size: 18px;
+        padding: 10px 50px;
+      }
+    }
+  }
+}
