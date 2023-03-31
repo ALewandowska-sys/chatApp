@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import FriendRequest from "../../friend_request/FriendRequest";
+import Login from "../../login/Login";
 import "./Navbar.scss";
-import Login from "../login/Login";
-import FriendsRequest from "../friend_request/FriendRequest";
 
 
 export default function Navbar(): JSX.Element {
@@ -39,7 +39,7 @@ export default function Navbar(): JSX.Element {
       </button>
 
       {showFriendsRequest && (
-        <FriendsRequest
+        <FriendRequest
           friends={[
 			{ username: "Jan", avatarUrl: "https://i.pravatar.cc/150?img=3" },
 			{ username: "Anna", avatarUrl: "https://i.pravatar.cc/150?img=3" },
