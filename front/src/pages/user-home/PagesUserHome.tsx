@@ -99,7 +99,7 @@ export default function PagesUserHome() {
 
     const comments: PostCommentResponse[] = getPostComments(postId);
     const posts = [...Posts];
-    
+
     const post = posts.find(p => p.id === postId)!;
     if(!post.comments) {
       post.comments = comments;
@@ -122,7 +122,7 @@ export default function PagesUserHome() {
 
   const handleSetTextPost = (text: any): void => {
     setNewPostText(text.target.value);
-  } 
+  }
 
   const handleAddComment = (postId: number) => {
 
