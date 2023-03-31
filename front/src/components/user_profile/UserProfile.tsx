@@ -1,7 +1,7 @@
 import React from 'react';
 import './UserProfile.scss';
 
-interface User {
+export interface User {
   login: string;
   city: string;
   age: number;
