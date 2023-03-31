@@ -11,10 +11,10 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Navbar />
-			<PagesUserFriends />
 			<Routes>
 				<Route path="/" element={<LandingPage />} />
 				<Route path="/myhome" element={<PagesUserHome />} />
+				<Route path="/friends" element={<PagesUserFriends />} />
 				<Route path="/logout" element={<Logout />} />
 			</Routes>
 		</BrowserRouter>
