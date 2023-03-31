@@ -4,8 +4,11 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import PagesUserHome from "./pages/user-home/PagesUserHome";
 import LandingPage from "./components/landing_page/LandingPage";
 import Logout from "./components/navbar/Logout";
-import Navbar from "./components/navbar/registration/Navbar";
+
+// import Navbar from "./components/navbar/registration/Navbar";
 import PagesUserFriends from "./pages/user-home/user-friends/PagesUserFriends";
+import "bootstrap-icons/font/bootstrap-icons.css";
+import Navbar from "./components/navbar/registration/Navbar";
 
 function App() {
 	return (

@@ -24,7 +24,7 @@ nav {
 		.inputsContainer {
 			input {
 				width: 80px;
-				height: 30px;
+				height: 40px;
 				padding: 3px;
 				margin: 3px;
 				border-radius: 5px;
@@ -33,6 +33,45 @@ nav {
 			}
 		}
 	}
+}
+
+/* Enable darkmode in a Bootstrap Page */
+@media (prefers-color-scheme: dark) {
+	body {
+			background-color: var(--bs-dark);
+			color: var(--bs-light);
+	}
+}
+
+.navbar-friendsRequest {
+	position: relative;
+	background-color: inherit;
+	border-width: 0px;
+	margin: 0 20px;
+}
+
+.notificationBell {
+	font-size: 30px;
+}
+
+.bi-bell-fill::before {
+	color: #e3edf5;
+}
+
+.navbar-friendsRequest:hover .bi-bell-fill::before {
+	color: #bac3ca;
+}
+
+.notificationDot {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	
+	height: 15px;
+	width: 15px;
+	background-color: rgb(233, 14, 14);
+
+	border-radius: 50%;
 }
 
 @media (min-width: 500px) {
