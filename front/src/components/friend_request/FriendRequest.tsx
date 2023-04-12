@@ -30,7 +30,6 @@ const FriendRequest: React.FC<FriendRequestProps> = ({
         </div>
         {friends.map((friend) => (
           <div key={friend.username} className="friendRequestContainer__item" >
-            <img
             <img className="friendRequestContainer__item__avatar"
               src={friend.avatarUrl}
               alt={`Zdjęcie użytkownika ${friend.username}`}
