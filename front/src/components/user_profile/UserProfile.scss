@@ -1,0 +1,123 @@
+.wrapper{
+  display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+  height: 100%;
+	width: 100%;
+
+  .userProfile {
+    color:black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 580px;
+    height: 380px;
+    padding: 20px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0px 0px 3px 0px rgb(22, 165, 58);
+    -moz-box-shadow: 0px 0px 3px 0px rgb(22, 165, 58);
+    box-shadow: 0px 0px 3px 0px rgb(22, 165, 58);
+  
+  
+    &__avatar {
+      width: 190px;
+      height: 190px;
+      border-radius: 50%;
+      margin: 0 25px 70px 0;
+    }
+  
+    &__info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: flex-start;
+      width: 100%;
+      margin-bottom: 60px;
+  
+      &--login {
+        font-size: 24px;
+        margin-top: 60px;
+        font-weight: bold;
+      }
+    
+      &--list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+  
+      &--list > li{
+        margin: 10px;
+      }
+    }
+  
+  
+  
+    &__buttons {
+      font-weight: bold;
+      display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;  
+      margin-top: 30px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      height: 30px;
+      width: 95px;
+  
+      &--addFriend, &--viewFriendsList{
+        cursor: pointer;
+        margin: 10px 10px;
+        padding: 5px 70px;
+        border: none;
+        border-radius: 4px;
+        font-weight: bold;
+        color: #fefefe;
+        background-color: rgb(22, 165, 58);
+      }
+    }
+  
+  }
+}
+
+
+
+
+@media screen and (max-width: 768px) {
+  .wrapper{
+    .userProfile {
+      flex-direction: column;
+      width: 100%; // zmiana szerokości kontenera na 100%
+      height: auto; // ustawienie wysokości kontenera na auto
+      padding: 20px; // zmniejszenie wcięcia
+
+      &__avatar {
+        width: 300px;
+        height: 300px;
+        margin: 20px 0 10px 0; // zmiana marginesu
+      }
+      &__info {
+        margin-bottom: 30px; // zmniejszenie marginesu
+        font-size: 16px; // zmniejszenie rozmiaru czcionki
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &--list {
+          margin: 10px;
+          font-size: 20px;;
+        }
+
+        &--login {
+          font-size: 34px; // zmniejszenie rozmiaru czcionki
+          margin-top: 30px; // zmiana marginesu
+        }
+      }
+    }
+  }
+
+  }
+
+

@@ -99,7 +99,7 @@ export default function PagesUserHome() {
 
     const comments: PostCommentResponse[] = getPostComments(postId);
     const posts = [...Posts];
-    
+
     const post = posts.find(p => p.id === postId)!;
     if(!post.comments) {
       post.comments = comments;
@@ -122,7 +122,7 @@ export default function PagesUserHome() {
 
   const handleSetTextPost = (text: any): void => {
     setNewPostText(text.target.value);
-  } 
+  }
 
   const handleAddComment = (postId: number) => {
 
@@ -161,25 +161,25 @@ export default function PagesUserHome() {
 
   return (
     <div className='container mt-5'>
-      <div className="shadow p-3 mb-5 bg-body rounded">
+      <div className="shadow p-3 mb-5 bg-dark text-white rounded">
 
-        <div className="mb-3">
+        <div className="mb-3 bg-dark text-white">
           <h4>
             <label htmlFor="exampleFormControlTextarea1" className="form-label px-2">Write a post</label>
           </h4>
-          <textarea className="form-control" id="exampleFormControlTextarea1"
+          <textarea className="form-control bg-dark text-white" id="exampleFormControlTextarea1"
             onChange={(text) => handleSetTextPost(text) } placeholder='Tell us how you doing?' rows={3}></textarea>
           <input type='button' className="btn btn-primary mt-2" value='Publish' onClick={handleAddPost} />
         </div>
 
       </div>
-      <div className="shadow-lg p-3 mb-5 bg-body rounded">
-        <div className='mt-3'>
+      <div className="shadow-lg p-3 mb-5 bg-dark text-white rounded">
+        <div className='mt-3 bg-dark text-white'>
           <h3>Your friends' posts</h3>
           {
             Posts.map(( post: PostResponse) => {
               return(
-                <div key={post.id} className="card mb-4">
+                <div key={post.id} className="card mb-4 bg-dark text-white">
                   <div className="card-header">
                     user: { `${post.user.firstname} ${post.user.lastname}` } User id: { post.user.id }
                   </div>
@@ -233,7 +233,7 @@ export default function PagesUserHome() {
                   }
 
                   <div className="card-footer d-flex">
-                    <textarea className="form-control" onChange={(text) => handleSetTextComment(post.id, text) } id="exampleFormControlTextarea1" placeholder='Comment..' value={post.comment} rows={1}>
+                    <textarea className="form-control bg-dark text-white" onChange={(text) => handleSetTextComment(post.id, text) } id="exampleFormControlTextarea1" placeholder='Comment..' value={post.comment} rows={1}>
                     </textarea>
                     <input type='button' className="btn btn-primary mx-2" value='Add Comment' onClick={() => handleAddComment(post.id)} />
                   </div>

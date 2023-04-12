@@ -17,16 +17,19 @@ const FriendRequest: React.FC<FriendRequestProps> = ({
   onReject,
   onClose,
 }) => {
+
   return (
-    <div className="friendRequestContainer">
-      <button className="friendRequestContainer__close" onClick={onClose}>
-        X
-      </button>
-        <div className="friendRequestContainer__tittle">
+    <div className="friendRequestContainer bg-dark text-white">
+      <div className="friendRequestContainer__close" onClick={onClose}>
+        <div>
+          +
+        </div>
+      </div>
+        <div className="friendRequestContainer__title">
           <p>Masz nowe zaproszenia do znajomych:</p>
         </div>
         {friends.map((friend) => (
-          <div key={friend.username}>
+          <div key={friend.username} className="friendRequestContainer__item" >
             <img
               src={friend.avatarUrl}
               alt={`Zdjęcie użytkownika ${friend.username}`}
