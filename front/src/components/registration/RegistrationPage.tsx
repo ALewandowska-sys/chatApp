@@ -1,7 +1,15 @@
+import { useState } from "react";
 import "./RegistrationPage.scss";
 import { useForm } from "react-hook-form";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase/firebase.config";
+import { useNavigate } from "react-router-dom";
 
 export default function RegistrationPage() {
+	const [registerEmail, setRegisterEmail] = useState("");
+	const [registerPassword, setRegisterPassword] = useState("");
+	const navigate = useNavigate();
+
 	const {
 		register,
 		watch,
@@ -18,6 +26,20 @@ export default function RegistrationPage() {
 
 	const errorStyles = {
 		color: "grey",
+	};
+
+	const registration = async () => {
+		try {
+			const user = await createUserWithEmailAndPassword(
+				auth,
+				registerEmail,
+				registerPassword
+			);
+			console.log(user);
+			navigate("/myhome");
+		} catch (error: any) {
+			console.log(error.message);
+		}
 	};
 
 	return (
@@ -51,6 +73,9 @@ export default function RegistrationPage() {
 							})}
 							placeholder="E-mail"
 							type="email"
+							onChange={(e) => {
+								setRegisterEmail(e.target.value);
+							}}
 						/>
 						<p style={errorStyles}>{errors.email?.message}</p>
 					</div>
@@ -67,6 +92,9 @@ export default function RegistrationPage() {
 							})}
 							placeholder="Hasło"
 							type="password"
+							onChange={(e) => {
+								setRegisterPassword(e.target.value);
+							}}
 						/>
 						<p style={errorStyles}>{errors.password?.message}</p>
 					</div>
@@ -86,7 +114,7 @@ export default function RegistrationPage() {
 						<p style={errorStyles}>{errors.password2?.message}</p>
 					</div>
 					<div>
-						<button>Utwórz konto</button>
+						<button onClick={registration}>Utwórz konto</button>
 					</div>
 				</form>
 			</div>
