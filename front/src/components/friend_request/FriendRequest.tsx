@@ -31,20 +31,20 @@ const FriendRequest: React.FC<FriendRequestProps> = ({
         {friends.map((friend) => (
           <div key={friend.username} className="friendRequestContainer__item" >
             <img
+            <img className="friendRequestContainer__item__avatar"
               src={friend.avatarUrl}
               alt={`Zdjęcie użytkownika ${friend.username}`}
-              className="friendRequestContainer__avatar"
             />
-            <p className="friendRequestContainer__username">{friend.username}</p>
-            <div className="friendRequestContainer__buttons">
+            <p className="friendRequestContainer__item__username">{friend.username}</p>
+            <div className="friendRequestContainer__item__buttons">
               <button
-                className="friendRequestContainer__buttons--accept"
+                className="friendRequestContainer__item__buttons--accept"
                 onClick={() => onAccept(friend.username)}
               >
                 Akceptuj
               </button>
               <button
-                className="friendRequestContainer__buttons--reject"
+                className="friendRequestContainer__item__buttons--reject"
                 onClick={() => onReject(friend.username)}
               >
                 Odrzuć

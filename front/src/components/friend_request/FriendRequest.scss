@@ -10,10 +10,53 @@
 	border-radius: 6px;
 	box-shadow: 0px 0px 3px 0px rgb(22, 165, 58);
 	margin-bottom: 20px;
+	width: 500px;
+	padding: 20px;
 	z-index: 1000;
+
+	&__title {
+		font-weight: bold;
+		margin: 18px 65px 20px 65px;
+		font-size: 18px;
+	}
 
 	&__item {
 		display: flex;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		padding: 10px;
+
+		&__avatar {
+			width: 80px;
+			height: 80px;
+			border-radius: 50%;
+		}
+	
+		&__username {
+			font-size: 16px;
+			margin: auto;
+		}
+	
+		&__buttons {
+			display: flex;
+			align-items: center;
+			margin-left: 15px;
+	
+			&--accept, &--reject {
+				background-color: rgb(22, 165, 58);
+				color: white;
+				padding: 8px 16px;
+				border: none;
+				border-radius: 5px;
+				margin-left: 15px;
+				cursor: pointer;
+				font-size: 16px;
+	
+				&:hover {
+					background-color: rgba(22, 165, 58, 0.785);
+				}
+			}
+		}
 	}
 
 	&__close {
@@ -34,46 +77,5 @@
 		}
 	}
 
-	&__title {
-		font-weight: bold;
-		margin: 18px 65px 20px 65px;
-		font-size: 18px;
 
-	}
-
-	&__username {
-		font-size: 16px;
-		display: flex;
-		align-items: center;
-		margin: -10px 10px 0 10px;
-	}
-
-	&__avatar {
-		width: 60px;
-		height: 60px;
-		border-radius: 50%;
-		margin: 10px;
-	}
-
-	&__buttons {
-		display: flex;
-		align-items: center;
-		
-
-		&--accept, &--reject {
-			background-color: rgb(22, 165, 58);
-			color: white;
-			padding: 8px 16px;
-			border: none;
-			border-radius: 5px;
-			margin-left: 15px;
-			margin-bottom: 15px;
-			cursor: pointer;
-			font-size: 16px;
-
-			&:hover {
-				background-color: rgba(22, 165, 58, 0.785);
-			}
-		}
-	}
 }
