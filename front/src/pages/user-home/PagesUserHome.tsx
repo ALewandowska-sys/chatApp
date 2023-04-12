@@ -6,6 +6,7 @@ import { DictReaction } from '../../models/DIctReaction'
 import { PostCommentResponse, PostResponse } from '../../responses/PostResponse'
 import { getRandomNumber } from '../../utils/utils.random'
 import { getPostComments } from './PagesUserHomeManager'
+import Navbar from '../../components/navbar/logged_in/NavbarUser'
 
 interface IToggledComment {
   postId: number;
@@ -160,92 +161,130 @@ export default function PagesUserHome() {
   }
 
   return (
-    <div className='container mt-5'>
-      <div className="shadow p-3 mb-5 bg-dark text-white rounded">
+		<>
+			<Navbar />
+			<div className="container mt-5">
+				<div className="shadow p-3 mb-5 bg-dark text-white rounded">
+					<div className="mb-3 bg-dark text-white">
+						<h4>
+							<label
+								htmlFor="exampleFormControlTextarea1"
+								className="form-label px-2"
+							>
+								Write a post
+							</label>
+						</h4>
+						<textarea
+							className="form-control bg-dark text-white"
+							id="exampleFormControlTextarea1"
+							onChange={(text) => handleSetTextPost(text)}
+							placeholder="Tell us how you doing?"
+							rows={3}
+						></textarea>
+						<input
+							type="button"
+							className="btn btn-primary mt-2"
+							value="Publish"
+							onClick={handleAddPost}
+						/>
+					</div>
+				</div>
+				<div className="shadow-lg p-3 mb-5 bg-dark text-white rounded">
+					<div className="mt-3 bg-dark text-white">
+						<h3>Your friends' posts</h3>
+						{Posts.map((post: PostResponse) => {
+							return (
+								<div key={post.id} className="card mb-4 bg-dark text-white">
+									<div className="card-header">
+										user: {`${post.user.firstname} ${post.user.lastname}`} User
+										id: {post.user.id}
+									</div>
+									<div className="card-body">
+										<p className="card-text"> {post.content} </p>
+									</div>
+									<div className="card-footer text-muted">
+										{dictReactionMock.map(
+											(reaction: DictReaction, i: number) => {
+												return (
+													<button
+														key={i}
+														className="btn btn-outline-primary btn-sm mx-1"
+														style={{
+															backgroundColor: isMyReaction(
+																post.id,
+																reaction.id
+															),
+														}}
+														onClick={() => addReaction(post.id, reaction.id)}
+													>
+														{reaction.name}
+													</button>
+												);
+											}
+										)}
+									</div>
+									<div className="card-footer text-muted d-flex">
+										<div className="mx-2">
+											<span onClick={() => handleShowComments(post.id)}>
+												{" "}
+												Pokaż Komentarze: ({post.commentsCount}){" "}
+											</span>
+										</div>
+										<div className="mx-2">
+											Reactions: ({post.reactions.length})
+										</div>
+										<div className="mx-2">{post.created_at.toDateString()}</div>
+									</div>
 
-        <div className="mb-3 bg-dark text-white">
-          <h4>
-            <label htmlFor="exampleFormControlTextarea1" className="form-label px-2">Write a post</label>
-          </h4>
-          <textarea className="form-control bg-dark text-white" id="exampleFormControlTextarea1"
-            onChange={(text) => handleSetTextPost(text) } placeholder='Tell us how you doing?' rows={3}></textarea>
-          <input type='button' className="btn btn-primary mt-2" value='Publish' onClick={handleAddPost} />
-        </div>
+									{post.comments &&
+										post.comments?.length > 0 &&
+										getToggledComment(post.id) && (
+											<div className="card m-3 p-4">
+												<h3 className="px-3">Comments</h3>
+												{post.comments?.map(
+													(comment: PostCommentResponse, i2: number) => {
+														return (
+															<div key={i2} className="card mb-2">
+																<div className="card-body">
+																	<div className="card-header">
+																		user:{" "}
+																		{`${comment.user.firstname} ${comment.user.lastname}`}{" "}
+																		User id: {comment.user.id},{" "}
+																		{comment.created_at.toDateString()}
+																	</div>
+																	<div className="card-body">
+																		{comment.content}
+																	</div>
+																</div>
+															</div>
+														);
+													}
+												)}
+											</div>
+										)}
 
-      </div>
-      <div className="shadow-lg p-3 mb-5 bg-dark text-white rounded">
-        <div className='mt-3 bg-dark text-white'>
-          <h3>Your friends' posts</h3>
-          {
-            Posts.map(( post: PostResponse) => {
-              return(
-                <div key={post.id} className="card mb-4 bg-dark text-white">
-                  <div className="card-header">
-                    user: { `${post.user.firstname} ${post.user.lastname}` } User id: { post.user.id }
-                  </div>
-                  <div className="card-body">
-                    <p className="card-text"> {post.content} </p>
-                  </div>
-                  <div className="card-footer text-muted">
-                    {
-                      dictReactionMock.map( (reaction: DictReaction, i: number) => {
-                        return(
-                          <button key={i} className="btn btn-outline-primary btn-sm mx-1" style={{ backgroundColor: isMyReaction(post.id, reaction.id) }}   onClick={() => addReaction(post.id, reaction.id)}>
-                            {reaction.name}
-                          </button>
-                        )
-                      })
-                    }
-                  </div>
-                  <div className="card-footer text-muted d-flex">
-                    <div className='mx-2'>
-                      <span onClick={() => handleShowComments(post.id)}> Pokaż Komentarze: ({post.commentsCount}) </span>
-                    </div>
-                    <div className='mx-2'>
-                      Reactions: ({ post.reactions.length })
-                    </div>
-                    <div className='mx-2'>
-                      { post.created_at.toDateString() }
-                    </div>
-                  </div>
-
-                  {
-                    post.comments && post.comments?.length > 0 && getToggledComment(post.id) &&
-                      <div className='card m-3 p-4'>
-                        <h3 className='px-3'>Comments</h3>
-                        {
-                          post.comments?.map( (comment: PostCommentResponse, i2: number) => {
-                            return (
-                              <div key={i2} className='card mb-2'>
-                                <div className="card-body">
-                                <div className="card-header">
-                                  user: { `${comment.user.firstname} ${comment.user.lastname}` } User id: { comment.user.id }, { comment.created_at.toDateString() }
-                                </div>
-                                <div className="card-body">
-                                  { comment.content }
-                                </div>
-                              </div>
-                              </div>
-                            )
-                          })
-                        }
-                      </div>
-                  }
-
-                  <div className="card-footer d-flex">
-                    <textarea className="form-control bg-dark text-white" onChange={(text) => handleSetTextComment(post.id, text) } id="exampleFormControlTextarea1" placeholder='Comment..' value={post.comment} rows={1}>
-                    </textarea>
-                    <input type='button' className="btn btn-primary mx-2" value='Add Comment' onClick={() => handleAddComment(post.id)} />
-                  </div>
-
-                </div>
-              )
-            })
-          }
-        </div>
-
-      </div>
-
-    </div>
-  )
+									<div className="card-footer d-flex">
+										<textarea
+											className="form-control bg-dark text-white"
+											onChange={(text) => handleSetTextComment(post.id, text)}
+											id="exampleFormControlTextarea1"
+											placeholder="Comment.."
+											value={post.comment}
+											rows={1}
+										></textarea>
+										<input
+											type="button"
+											className="btn btn-primary mx-2"
+											value="Add Comment"
+											onClick={() => handleAddComment(post.id)}
+										/>
+									</div>
+								</div>
+							);
+						})}
+					</div>
+				</div>
+			</div>
+		</>
+	);
 }
