@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import FriendRequest from "../../friend_request/FriendRequest";
 import Login from "../../login_form/Login";
 import "./Navbar.scss";
+import FriendRequest from "../../friend_request/FriendRequest";
 
 
 
@@ -32,7 +32,7 @@ export default function Navbar(): JSX.Element {
 
       <Login />
 
-      {/* <button className="navbar-friendsRequest" onClick={handleFriendsRequestClick}>
+      <button className="navbar-friendsRequest" onClick={handleFriendsRequestClick}>
         <i className="bi bi-bell-fill notificationBell"></i>
         {
           !isAnyNotification() &&
@@ -51,7 +51,7 @@ export default function Navbar(): JSX.Element {
           onReject={(username) => {console.log(`rejected ${username}`)}}
           onClose={handleCloseFriendsRequest}
         />
-      )} */}
+      )} 
 
     </nav>
 

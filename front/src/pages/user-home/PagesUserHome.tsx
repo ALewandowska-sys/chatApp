@@ -6,7 +6,6 @@ import { DictReaction } from '../../models/DIctReaction'
 import { PostCommentResponse, PostResponse } from '../../responses/PostResponse'
 import { getRandomNumber } from '../../utils/utils.random'
 import { getPostComments } from './PagesUserHomeManager'
-import Navbar from '../../components/navbar/logged_in/NavbarUser'
 
 interface IToggledComment {
   postId: number;
@@ -162,7 +161,6 @@ export default function PagesUserHome() {
 
   return (
 		<>
-			<Navbar />
 			<div className="container mt-5">
 				<div className="shadow p-3 mb-5 bg-dark text-white rounded">
 					<div className="mb-3 bg-dark text-white">

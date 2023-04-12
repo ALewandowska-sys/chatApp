@@ -8,10 +8,13 @@ import PagesUserFriends from "./pages/user-home/user-friends/PagesUserFriends";
 import "bootstrap-icons/font/bootstrap-icons.css";
 import UserProfile from "./components/user_profile/UserProfile";
 import Navbar from "./components/navbar/not_logged/Navbar";
+import NavbarUser from "./components/navbar/logged_in/NavbarUser";
+
 function App() {
 	return (
 		<BrowserRouter>
 			<Navbar />
+			<NavbarUser />
 			<Routes>
 				<Route path="/" element={<LandingPage />} />
 				<Route path="/myhome" element={<PagesUserHome />} />
