@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import FriendRequest from "../../friend_request/FriendRequest";
 import Login from "../../login_form/Login";
 import "./Navbar.scss";
-import FriendRequest from "../../friend_request/FriendRequest";
+import ThemeSwitcher from "../../theme_switcher/ThemeSwitcher";
 
 
 

@@ -11,7 +11,6 @@ body {
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	/* background-color: rgb(115, 114, 114) !important; */
 }
 
 code {
@@ -19,14 +18,28 @@ code {
 		monospace;
 }
 
-  :root[color-scheme="light"]{
-	background-color: white;
-	color: black;
-	color-scheme: light;
-  }
+:root{
+	
+/* Light Mode */
+--bg--light: white;
+--txt--light: black;
 
-  :root[color-scheme="dark"]{
-	background-color: #2f2e30;
-	color: white;
+/* Dark mode */
+--bg--dark: #2f2e30;
+--txt--dark: white;
+}
+
+
+:root[color-scheme="light"]{
+	/* body background color */
+	--bs-body-bg: var(--bg--light);	
+	/* txt color	 */
+	--bs-body-color: var(--txt--light);
+	color-scheme: light;
+}
+
+:root[color-scheme="dark"]{
+	--bs-body-bg: var(--bg--dark);
+	--bs-body-color: var(--txt--dark);
 	color-scheme: dark;
-  }
+}
