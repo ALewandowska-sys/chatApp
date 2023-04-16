@@ -13,7 +13,8 @@
 	width: 500px;
 	padding: 20px;
 	z-index: 1000;
-	
+	background-color: var(--bs-body-bg) !important;
+
 
 	&__title {
 		font-weight: bold;
@@ -67,7 +68,6 @@
     cursor: pointer;
     font-size: 50px;
     background-color: inherit;
-    color: white;
     transform: rotate(45deg);
     height: 0px;
     width: 0px;
