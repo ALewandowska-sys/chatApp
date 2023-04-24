@@ -11,6 +11,7 @@ import Navbar from "./components/navbar/not_logged/Navbar";
 import NavbarUser from "./components/navbar/logged_in/NavbarUser";
 
 function App() {
+
 	return (
 		<BrowserRouter>
 			<Navbar />

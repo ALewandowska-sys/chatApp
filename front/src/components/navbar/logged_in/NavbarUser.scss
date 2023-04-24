@@ -8,9 +8,69 @@
 	background-color: #0d2231;
     color: #e3edf5;
 
-	.navbarUser-logo {
+	&--logo {
 		text-decoration: none;
 		padding: 3px;
 	}
+
+	&:hover .bi-bell-fill::before {
+		color: #bac3ca;
+	}
+
+	&--buttonsWrapper{
+		display: flex;
+		flex-direction: row;
+		justify-content: flex-end;
+		align-items: center;
+
+		&--friendsRequest {
+			position: relative;
+			color: black;
+			background-color: inherit;
+			border-width: 0px;
+			margin: 0 20px;
+		}
+	
+		&--notificationBell {
+			font-size: 30px;	
+		}
+	
+		&--notificationDot {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+		
+			height: 15px;
+			width: 15px;
+			background-color: rgb(233, 14, 14);
+		
+			border-radius: 50%;
+		}
+
+	}
+
 }
+
+
+.bi-bell-fill::before {
+	color: #e3edf5;
+}
+
+@media (max-width: 500px) {
+
+    
+	.navbarUser--notificationBell {
+    font-size: 24px;
+    }
+
+	.navbarUser--notificationDot {
+		top: 7px;
+		right: 3px;
+		height: 10px;
+		width: 10px;
+}
+}
+
+
+
 
