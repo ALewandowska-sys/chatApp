@@ -1,20 +1,48 @@
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-	margin: 0;
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
-		"Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
-		sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	/* background-color: rgb(115, 114, 114) !important; */
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
-		monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+:root {
+  /* Light Mode */
+  --bg--light: white;
+  --txt--light: black;
+  --nav-light: #0d2231;
+
+  /* Dark mode */
+  --bg--dark: #2f2e30;
+  --txt--dark: white;
+  --nav-dark: #050d12;
+}
+
+:root[color-scheme="light"] {
+  /* body background color */
+  --bs-body-bg: var(--bg--light);
+  /* txt color	 */
+  --bs-body-color: var(--txt--light);
+  /* navbar color */
+  --bs-nav-color: var(--nav-light);
+  color-scheme: light;
+}
+
+:root[color-scheme="dark"] {
+  --bs-body-bg: var(--bg--dark);
+  --bs-body-color: var(--txt--dark);
+  --bs-nav-color: var(--nav-dark);
+  color-scheme: dark;
 }
