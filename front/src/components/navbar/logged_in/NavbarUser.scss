@@ -1,16 +1,15 @@
 .navbarUser {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding: 10px;
-	text-decoration: none;
-	font-size: 14px;
-	background-color: #0d2231;
-    color: #e3edf5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 14px;
+  background-color: var(--bs-nav-color);
+  color: #e3edf5;
 
-	.navbarUser-logo {
-		text-decoration: none;
-		padding: 3px;
-	}
+  .navbarUser-logo {
+    text-decoration: none;
+    padding: 3px;
+  }
 }
-

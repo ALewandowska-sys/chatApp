@@ -1,110 +1,110 @@
 nav {
-	display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	padding: 10px;
-	text-decoration: none;
-	font-size: 14px;
-	background-color: #0d2231;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+  text-decoration: none;
+  font-size: 14px;
+  background-color: var(--bs-nav-color);
 
-	.navbar-login, .navbar-logo {
-		text-decoration: none;
-		padding: 3px;
-		color: #e3edf5;
-	}
+  .navbar-login,
+  .navbar-logo {
+    text-decoration: none;
+    padding: 3px;
+    color: #e3edf5;
+  }
 
-	.navbar-logo {
-		display: none;
-	}
+  .navbar-logo {
+    display: none;
+  }
 
-	form {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		.inputsContainer {
-			input {
-				width: 80px;
-				height: 40px;
-				padding: 3px;
-				margin: 3px;
-				border-radius: 5px;
-				border: none;
-				text-align: center;
-			}
-		}
-	}
+  form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .inputsContainer {
+      input {
+        width: 80px;
+        height: 40px;
+        padding: 3px;
+        margin: 3px;
+        border-radius: 5px;
+        border: none;
+        text-align: center;
+      }
+    }
+  }
 }
 
-
 .navbar-friendsRequest {
-	position: relative;
-	background-color: inherit;
-	border-width: 0px;
-	margin: 0 20px;
+  position: relative;
+  background-color: inherit;
+  border-width: 0px;
+  margin: 0 20px;
 }
 
 .notificationBell {
-	font-size: 30px;
+  font-size: 30px;
 }
 
 .bi-bell-fill::before {
-	color: #e3edf5;
+  color: #e3edf5;
 }
 
 .navbar-friendsRequest:hover .bi-bell-fill::before {
-	color: #bac3ca;
+  color: #bac3ca;
 }
 
 .notificationDot {
-	position: absolute;
-	top: 0px;
-	right: 0px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
 
-	height: 15px;
-	width: 15px;
-	background-color: rgb(233, 14, 14);
+  height: 15px;
+  width: 15px;
+  background-color: rgb(233, 14, 14);
 
-	border-radius: 50%;
+  border-radius: 50%;
 }
 
 @media (min-width: 500px) {
-	nav {
-		form {
-			.inputsContainer {
-				input {
-					margin: 5px;
-				}
-			}
-		}
-		.navbar-login {
-			margin: 5px;
-		}
-	}
+  nav {
+    form {
+      .inputsContainer {
+        input {
+          margin: 5px;
+        }
+      }
+    }
+    .navbar-login {
+      margin: 5px;
+    }
+  }
 }
 
 @media (min-width: 768px) {
-	nav {
-		justify-content: space-around;
-		padding: 15px;
-		font-size: 18px;
+  nav {
+    justify-content: space-around;
+    padding: 15px;
+    font-size: 18px;
 
-		.navbar-login {
-			padding: 5px;
-		}
+    .navbar-login {
+      padding: 5px;
+    }
 
-		.navbar-logo {
-			display: block;
-		}
+    .navbar-logo {
+      display: block;
+    }
 
-		form {
-			.inputsContainer {
-				input {
-					width: 100px;
-					height: 35px;
-					padding: 5px;
-					margin: 5px;
-				}
-			}
-		}
-	}
+    form {
+      .inputsContainer {
+        input {
+          width: 100px;
+          height: 35px;
+          padding: 5px;
+          margin: 5px;
+        }
+      }
+    }
+  }
 }
