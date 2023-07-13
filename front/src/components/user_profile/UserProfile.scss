@@ -89,18 +89,18 @@
   .wrapper{
     .userProfile {
       flex-direction: column;
-      width: 100%; // zmiana szerokości kontenera na 100%
-      height: auto; // ustawienie wysokości kontenera na auto
-      padding: 20px; // zmniejszenie wcięcia
+      width: 100%;
+      height: auto;
+      padding: 20px; 
 
       &__avatar {
         width: 300px;
         height: 300px;
-        margin: 20px 0 10px 0; // zmiana marginesu
+        margin: 20px 0 10px 0;
       }
       &__info {
-        margin-bottom: 30px; // zmniejszenie marginesu
-        font-size: 16px; // zmniejszenie rozmiaru czcionki
+        margin-bottom: 30px;
+        font-size: 16px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -111,8 +111,8 @@
         }
 
         &--login {
-          font-size: 34px; // zmniejszenie rozmiaru czcionki
-          margin-top: 30px; // zmiana marginesu
+          font-size: 34px;
+          margin-top: 30px;
         }
       }
     }
