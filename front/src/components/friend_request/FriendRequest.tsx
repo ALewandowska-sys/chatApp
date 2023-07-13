@@ -19,7 +19,7 @@ const FriendRequest: React.FC<FriendRequestProps> = ({
 }) => {
 
   return (
-    <div className="friendRequestContainer bg-dark text-white">
+    <div className="friendRequestContainer">
       <div className="friendRequestContainer__close" onClick={onClose}>
         <div>
           +
