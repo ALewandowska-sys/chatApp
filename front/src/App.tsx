@@ -14,7 +14,8 @@ function App() {
 
 	return (
 		<BrowserRouter>
-			<Navbar />
+			{/* TODO */}
+			<Navbar /> 
 			<NavbarUser />
 			<Routes>
 				<Route path="/" element={<LandingPage />} />

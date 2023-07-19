@@ -11,18 +11,9 @@ import ThemeSwitcher from "../../theme_switcher/ThemeSwitcher";
 export default function Navbar(): JSX.Element {
   const [showFriendsRequest, setShowFriendsRequest] = useState(false);
 
-  const handleFriendsRequestClick = (): void => {
-    setShowFriendsRequest(!showFriendsRequest);
-	  console.log("show friends request")
-  }
-
   const handleCloseFriendsRequest = (): void => {
     setShowFriendsRequest(false);
 	  console.log("close friends request")
-  }
-
-  const isAnyNotification = (): boolean => {
-    return showFriendsRequest;
   }
 
   return (
@@ -32,14 +23,6 @@ export default function Navbar(): JSX.Element {
       </Link>
 
       <Login />
-
-      <button className="navbar-friendsRequest" onClick={handleFriendsRequestClick}>
-        <i className="bi bi-bell-fill notificationBell"></i>
-        {
-          !isAnyNotification() &&
-          <div className="notificationDot"></div>
-        }
-      </button>
 
       {showFriendsRequest && (
         <FriendRequest
