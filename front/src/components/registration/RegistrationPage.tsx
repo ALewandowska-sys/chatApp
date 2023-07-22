@@ -1,13 +1,20 @@
 import { useState } from "react";
 import "./RegistrationPage.scss";
 import { useForm } from "react-hook-form";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  getAuth,
+  updateProfile,
+} from "firebase/auth";
 import { auth } from "../../firebase/firebase.config";
 import { useNavigate } from "react-router-dom";
+import { FormData } from "../../interfaces/FormData";
 
 export default function RegistrationPage() {
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [username, setUsername] = useState(""); // Dodaj stan dla username
   const navigate = useNavigate();
 
   const {
@@ -28,13 +35,32 @@ export default function RegistrationPage() {
     color: "grey",
   };
 
-  const registration = async () => {
+  // Funkcja do aktualizacji nazwy użytkownika w Firebase Auth
+  const updateUsername = async (user: any, username: string) => {
+    try {
+      const auth = getAuth();
+      await updateProfile(user, {
+        displayName: username,
+      });
+    } catch (error) {
+      if (error instanceof Error) {
+        console.log(error.message);
+      } else {
+        console.log("Wystąpił nieznany błąd");
+      }
+    }
+  };
+
+  const registration = async (data: FormData) => {
     try {
       const user = await createUserWithEmailAndPassword(
         auth,
-        registerEmail,
-        registerPassword
+        data.email,
+        data.password
       );
+
+      await updateUsername(user.user, data.username);
+
       console.log(user);
       navigate("/myhome");
     } catch (error: any) {
@@ -46,11 +72,7 @@ export default function RegistrationPage() {
     <div className="wrapper">
       <div className="form-wrapper">
         <h2>Zarejestruj się</h2>
-        <form
-          onSubmit={handleSubmit((data) => {
-            console.log(data);
-          })}
-        >
+        <form onSubmit={handleSubmit(registration)}>
           <div>
             <input
               {...register("username", {
@@ -114,7 +136,7 @@ export default function RegistrationPage() {
             <p style={errorStyles}>{errors.password2?.message}</p>
           </div>
           <div>
-            <button onClick={registration}>Utwórz konto</button>
+            <button type="submit">Utwórz konto</button>{" "}
           </div>
         </form>
       </div>
