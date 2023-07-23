@@ -9,6 +9,7 @@ import {
 } from "../../responses/PostResponse";
 import { getRandomNumber } from "../../utils/utils.random";
 import { getPostComments } from "./PagesUserHomeManager";
+import AddNewPost from "../../components/add_new_post/AddNewPost";
 
 interface IToggledComment {
   postId: number;
@@ -164,6 +165,7 @@ export default function PagesUserHome() {
 
   return (
     <>
+      <AddNewPost />
       <div className="container mt-5">
         <div className="shadow p-3 mb-5 bg-dark text-white rounded">
           <div className="mb-3 bg-dark text-white">

@@ -1,0 +1,29 @@
+.add-new-post {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px; /* Odstęp między elementami */
+  margin-top: 20px; /* Odstęp na górze (możesz dostosować według potrzeb) */
+}
+
+.add-new-post__label {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.add-new-post__text-area {
+  width: 100%;
+  max-width: 400px; /* Możesz dostosować szerokość */
+  padding: 10px;
+  font-size: 16px;
+  resize: none;
+}
+
+.add-new-post__submit-btn {
+  padding: 10px 20px;
+  font-size: 16px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
