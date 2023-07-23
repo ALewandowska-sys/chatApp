@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../firebase/firebase.config";
+import "./RegistrationPage.scss";
 
 export default function RegistrationPage() {
   const [registerEmail, setRegisterEmail] = useState("");
