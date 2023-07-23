@@ -1,53 +1,42 @@
 import React, { useState } from "react";
 import "./AddNewPost.scss";
-import { Post } from "../../interfaces/Post";
 import { Timestamp } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
 import { auth, firestore } from "../../firebase/firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function AddNewPost() {
-  const [post, setPost] = useState<Post>({
-    userId: "",
-    content: "",
-    createdAt: Timestamp.now().toDate(),
-    comments: [],
-    reactions: [],
-  });
+  const [content, setContent] = useState("");
 
   const [user] = useAuthState(auth);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setPost({ ...post, [e.target.name]: e.target.value });
+    setContent(e.target.value);
   };
 
   const handlePublish = async () => {
-    if (!post.content) {
+    console.log("clck");
+    if (!content) {
       alert("Post nie może być pusty");
       return;
     } else {
       if (user) {
-        // Sprawdzenie, czy user nie jest null ani undefined
+        console.log("if user");
+
+        //olc@wp.pl UTZg6.uBgqWq6m
+
         const postCollectionRef = collection(firestore, "Posts");
-        const newPost: Post = {
+        const newPost = {
           userId: user.uid,
-          content: post.content,
-          createdAt: post.createdAt,
+          content: content,
+          createdAt: Timestamp.now().toDate(),
           comments: [],
           reactions: [],
         };
         try {
           await addDoc(postCollectionRef, newPost);
-          // Zresetuj stan posta po pomyślnym opublikowaniu
-          setPost({
-            userId: "",
-            content: "",
-            createdAt: Timestamp.now().toDate(),
-            comments: [],
-            reactions: [],
-          });
-          console.log("clock");
-          console.log(newPost);
+          setContent(""); // Resetuj stan po pomyślnym opublikowaniu
+          console.log("Post opublikowany pomyślnie!");
         } catch (error) {
           console.log("Błąd podczas publikowania posta:", error);
         }
@@ -71,7 +60,7 @@ export default function AddNewPost() {
           placeholder="Jak się dziś czujesz?"
           rows={3}
           name="content"
-          value={post.content}
+          value={content}
           onChange={handleChange}
         ></textarea>
         <input
