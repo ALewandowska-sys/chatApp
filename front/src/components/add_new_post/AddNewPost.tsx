@@ -3,25 +3,27 @@ import "./AddNewPost.scss";
 
 export default function AddNewPost() {
   return (
-    <div className="add-new-post">
-      <h4>
-        <label
-          htmlFor="exampleFormControlTextarea1"
-          className="add-new-post__label"
-        >
-          Napisz post
-        </label>
-      </h4>
-      <textarea
-        className="add-new-post__text-area"
-        placeholder="Jak się dziś czujesz?"
-        rows={3}
-      ></textarea>
-      <input
-        type="button"
-        className="add-new-post__submit-btn"
-        value="Publikuj"
-      />
+    <div className="add-new-post__container">
+      <div className="add-new-post">
+        <h4>
+          <label
+            htmlFor="exampleFormControlTextarea1"
+            className="add-new-post__label"
+          >
+            Napisz post
+          </label>
+        </h4>
+        <textarea
+          className="add-new-post__text-area"
+          placeholder="Jak się dziś czujesz?"
+          rows={3}
+        ></textarea>
+        <input
+          type="button"
+          className="add-new-post__submit-btn"
+          value="Publikuj"
+        />
+      </div>
     </div>
   );
 }
