@@ -1,7 +1,60 @@
-import React from "react";
+import React, { useState } from "react";
 import "./AddNewPost.scss";
+import { Post } from "../../interfaces/Post";
+import { Timestamp } from "firebase/firestore";
+import { collection, addDoc } from "firebase/firestore";
+import { auth, firestore } from "../../firebase/firebase.config";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 export default function AddNewPost() {
+  const [post, setPost] = useState<Post>({
+    userId: "",
+    content: "",
+    createdAt: Timestamp.now().toDate(),
+    comments: [],
+    reactions: [],
+  });
+
+  const [user] = useAuthState(auth);
+
+  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setPost({ ...post, [e.target.name]: e.target.value });
+  };
+
+  const handlePublish = async () => {
+    if (!post.content) {
+      alert("Post nie może być pusty");
+      return;
+    } else {
+      if (user) {
+        // Sprawdzenie, czy user nie jest null ani undefined
+        const postCollectionRef = collection(firestore, "Posts");
+        const newPost: Post = {
+          userId: user.uid,
+          content: post.content,
+          createdAt: post.createdAt,
+          comments: [],
+          reactions: [],
+        };
+        try {
+          await addDoc(postCollectionRef, newPost);
+          // Zresetuj stan posta po pomyślnym opublikowaniu
+          setPost({
+            userId: "",
+            content: "",
+            createdAt: Timestamp.now().toDate(),
+            comments: [],
+            reactions: [],
+          });
+          console.log("clock");
+          console.log(newPost);
+        } catch (error) {
+          console.log("Błąd podczas publikowania posta:", error);
+        }
+      }
+    }
+  };
+
   return (
     <div className="add-new-post__container">
       <div className="add-new-post">
@@ -17,54 +70,17 @@ export default function AddNewPost() {
           className="add-new-post__text-area"
           placeholder="Jak się dziś czujesz?"
           rows={3}
+          name="content"
+          value={post.content}
+          onChange={handleChange}
         ></textarea>
         <input
           type="button"
           className="add-new-post__submit-btn"
           value="Publikuj"
+          onClick={handlePublish}
         />
       </div>
     </div>
   );
 }
-
-// articles 9:36
-
-// import firebase from "firebase/app";
-// import "firebase/auth";
-// import { auth } from "../../firebase/firebase.config";
-// import { Auth } from "firebase/auth";
-
-// export default function AddNewPost() {
-//   const [user] = useAuthState(auth);
-
-//   return (
-//     <>
-//       <h4>
-//         <label
-//           htmlFor="exampleFormControlTextarea1"
-//           className="form-label px-2"
-//         >
-//           Write a post
-//         </label>
-//       </h4>
-//       <textarea
-//         className="form-control bg-dark text-white"
-//         id="exampleFormControlTextarea1"
-//         onChange={(text) => handleSetTextPost(text)}
-//         placeholder="Tell us how you doing?"
-//         rows={3}
-//       ></textarea>
-//       <input
-//         type="button"
-//         className="btn btn-primary mt-2"
-//         value="Publish"
-//         onClick={handleAddPost}
-//       />
-//     </>
-//   );
-// }
-
-// function useAuthState(auth: Auth): [any] {
-//   throw new Error("Function not implemented.");
-// }

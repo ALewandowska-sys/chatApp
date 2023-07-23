@@ -8,7 +8,7 @@ import {
 } from "firebase/auth";
 import { auth } from "../../firebase/firebase.config";
 import { useNavigate } from "react-router-dom";
-import { FormData } from "../../interfaces/FormData";
+import { UserForm } from "../../interfaces/UserForm";
 
 export default function RegistrationPage() {
   const [registerEmail, setRegisterEmail] = useState("");
@@ -51,7 +51,7 @@ export default function RegistrationPage() {
     }
   };
 
-  const registration = async (data: FormData) => {
+  const registration = async (data: UserForm) => {
     try {
       const user = await createUserWithEmailAndPassword(
         auth,
