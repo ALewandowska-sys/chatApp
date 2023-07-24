@@ -15,15 +15,18 @@ export default function AddNewPost() {
   };
 
   const handlePublish = async () => {
-    console.log("clck");
+
+    console.log("publish click");
+
     if (!content) {
       alert("Post nie może być pusty");
       return;
     } else {
       if (user) {
-        console.log("if user");
 
-        //olc@wp.pl UTZg6.uBgqWq6m
+        console.log("if user is logged in");
+
+        //user test: olc@wp.pl UTZg6.uBgqWq6m
 
         const postCollectionRef = collection(firestore, "Posts");
         const newPost = {
