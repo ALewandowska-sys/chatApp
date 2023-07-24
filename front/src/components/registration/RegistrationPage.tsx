@@ -1,9 +1,9 @@
-import { useState } from "react";
-import "./RegistrationPage.scss";
-import { useForm } from "react-hook-form";
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../firebase/firebase.config";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { auth } from "../../firebase/firebase.config";
+import "./RegistrationPage.scss";
 
 export default function RegistrationPage() {
   const [registerEmail, setRegisterEmail] = useState("");
