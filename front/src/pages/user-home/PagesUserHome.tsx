@@ -165,9 +165,9 @@ export default function PagesUserHome() {
 
   return (
     <>
-      <AddNewPost />
       <div className="container mt-5">
-        <div className="shadow p-3 mb-5 bg-dark text-white rounded">
+        <AddNewPost />
+        {/* <div className="shadow p-3 mb-5 bg-dark text-white rounded">
           <div className="mb-3 bg-dark text-white">
             <h4>
               <label
@@ -191,7 +191,7 @@ export default function PagesUserHome() {
               onClick={handleAddPost}
             />
           </div>
-        </div>
+        </div> */}
         <div className="shadow-lg p-3 mb-5 bg-dark text-white rounded">
           <div className="mt-3 bg-dark text-white">
             <h3>Your friends' posts</h3>
