@@ -9,14 +9,19 @@ import "bootstrap-icons/font/bootstrap-icons.css";
 import UserProfile from "./components/user_profile/UserProfile";
 import Navbar from "./components/navbar/not_logged/Navbar";
 import NavbarUser from "./components/navbar/logged_in/NavbarUser";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { auth } from "./firebase/firebase.config";
 
 function App() {
+	const [user] = useAuthState(auth);
 
 	return (
 		<BrowserRouter>
-			{/* TODO */}
-			<Navbar /> 
-			<NavbarUser />
+			{user?.uid ? (
+				<NavbarUser />
+			) : (
+				<Navbar />
+			)}
 			<Routes>
 				<Route path="/" element={<LandingPage />} />
 				<Route path="/myhome" element={<PagesUserHome />} />
