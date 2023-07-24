@@ -2,10 +2,12 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../firebase/firebase.config";
+import { auth, firestore } from "../../firebase/firebase.config";
 import "./RegistrationPage.scss";
+import { addDoc, collection } from "firebase/firestore";
 
 export default function RegistrationPage() {
+  const [username, setUsername] = useState("");
   const [registerEmail, setRegisterEmail] = useState("");
   const [registerPassword, setRegisterPassword] = useState("");
   const navigate = useNavigate();
@@ -28,6 +30,20 @@ export default function RegistrationPage() {
     color: "grey",
   };
 
+  const addUsernameToCollection = async (username: string, userId: string) => {
+    try {
+      const usernameCollectionRef = collection(firestore, "Usernames");
+      const newUsername = {
+        username,
+        userId,
+      };
+      await addDoc(usernameCollectionRef, newUsername);
+      console.log("Nazwa użytkownika została zapisana w kolekcji 'Usernames'");
+    } catch (error) {
+      console.log("Błąd podczas zapisywania nazwy użytkownika:", error);
+    }
+  };
+
   const registration = async () => {
     try {
       const user = await createUserWithEmailAndPassword(
@@ -35,7 +51,11 @@ export default function RegistrationPage() {
         registerEmail,
         registerPassword
       );
-      console.log(user);
+      console.log(user, "auth with mail and password");
+
+      // Zapisz nazwę użytkownika w kolekcji "Usernames" po utworzeniu konta
+      addUsernameToCollection(username, user.user.uid);
+
       navigate("/myhome");
     } catch (error: any) {
       console.log(error.message);
@@ -59,6 +79,9 @@ export default function RegistrationPage() {
               })}
               placeholder="Nazwa użytkownika"
               type="text"
+              onChange={(e) => {
+                setUsername(e.target.value); // Ustawienie nazwy użytkownika na podstawie wprowadzonej wartości
+              }}
             />
             <p style={errorStyles}>{errors.username?.message}</p>
           </div>
