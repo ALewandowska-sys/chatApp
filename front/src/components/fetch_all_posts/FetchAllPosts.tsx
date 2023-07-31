@@ -5,7 +5,7 @@ import "./FetchAllPosts.scss";
 import AddComment from "../add_comment/AddComment";
 import { useAuthState } from "react-firebase-hooks/auth";
 import UsernameDisplay from "../username-display/UsernameDisplay";
-import FetchAllComments from "../fetch_all_comments/FetchAllComments"; // Import the FetchAllComments component
+import FetchAllComments from "../fetch_all_comments/FetchAllComments";
 
 interface Post {
   id: string;
@@ -19,8 +19,9 @@ interface Post {
 export default function FetchAllPosts() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [user] = useAuthState(auth);
-  const [showComments, setShowComments] = useState<boolean>(false); // New state to track if comments should be shown
+  const [showComments, setShowComments] = useState<boolean>(false);
 
+  // Fetch all posts from Firestore
   const fetchPosts = async () => {
     const postCollectionRef = collection(firestore, "Posts");
     try {
@@ -40,6 +41,7 @@ export default function FetchAllPosts() {
     }
   };
 
+  // Subscribe to changes in the 'Posts' collection in Firestore
   useEffect(() => {
     const postCollectionRef = collection(firestore, "Posts");
     const unsubscribe = onSnapshot(postCollectionRef, (snapshot) => {
@@ -61,6 +63,7 @@ export default function FetchAllPosts() {
     return () => unsubscribe();
   }, []);
 
+  // Function to handle toggling comments visibility
   const handleToggleComments = () => {
     setShowComments((prevShowComments) => !prevShowComments); // Toggle the value of showComments on click
   };
@@ -72,6 +75,7 @@ export default function FetchAllPosts() {
           <UsernameDisplay userId={post.userId} />
           <p>Content: {post.content}</p>
           <p>CreatedAt: {post.createdAt.toDate().toLocaleString()}</p>
+          {/* Clickable paragraph to toggle comments visibility */}
           <p onClick={handleToggleComments} style={{ cursor: "pointer", color: "blue" }}>
             Comments: {post.comments ? post.comments.length : 0}
           </p>

@@ -40,6 +40,7 @@ const FetchAllComments: React.FC<FetchAllCommentsProps> = ({ postId }) => {
       }
     };
 
+    // Function to respond to changes in the comments collection (e.g., when a new comment is added)
     const unsubscribe = onSnapshot(query(commentsCollectionRef, where("postId", "==", postId)), (snapshot) => {
       const updatedComments = snapshot.docs.map((doc) => ({
         id: doc.id,
@@ -51,7 +52,7 @@ const FetchAllComments: React.FC<FetchAllCommentsProps> = ({ postId }) => {
     fetchComments();
 
     return () => unsubscribe();
-  }, [postId, commentsCollectionRef]); // Add commentsCollectionRef to the dependency array
+  }, [postId, commentsCollectionRef]); // Update the comments state only when postId or commentsCollectionRef changes
 
   return (
     <div>
