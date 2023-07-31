@@ -1,9 +1,11 @@
 // FetchAllComments.tsx
-
 import React, { useEffect, useState } from "react";
 import { collection, getDocs, where, query, onSnapshot } from "firebase/firestore";
 import { auth, firestore } from "../../firebase/firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
+import UsernameDisplay from "../username-display/UsernameDisplay"; // Import the new component
+import './FetchAllComments.scss'
+
 
 interface Comment {
   id: string;
@@ -25,7 +27,7 @@ const FetchAllComments: React.FC<FetchAllCommentsProps> = ({ postId }) => {
   useEffect(() => {
     const fetchComments = async () => {
       const postCommentsQuery = query(commentsCollectionRef, where("postId", "==", postId));
-      
+
       try {
         const querySnapshot = await getDocs(postCommentsQuery);
         const fetchedComments = querySnapshot.docs.map((doc) => ({
@@ -54,11 +56,10 @@ const FetchAllComments: React.FC<FetchAllCommentsProps> = ({ postId }) => {
   return (
     <div>
       {comments.map((comment) => (
-        <div key={comment.id}>
+        <div key={comment.id} className="comment">
           <p>CommentContent: {comment.commentContent}</p>
           <p>CommentCreatedAt: {comment.commentCreatedAt.toDate().toLocaleString()}</p>
-          {/* Fetch username using comment.userId */}
-          {/* You can create a new component for this */}
+          <UsernameDisplay userId={comment.userId} />
         </div>
       ))}
     </div>

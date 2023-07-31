@@ -19,6 +19,10 @@ const AddComment: React.FC<AddCommentProps> = ({ postId, userId }) => {
   const [commentContent, setCommentContent] = useState("");
   const [user] = useAuthState(auth);
 
+  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setCommentContent(e.target.value);
+  };
+
   const handleAddComment = async () => {
     if (!commentContent) {
       alert("Comment cannot be empty");
@@ -59,7 +63,8 @@ const AddComment: React.FC<AddCommentProps> = ({ postId, userId }) => {
       <textarea
         placeholder="Napisz swój komentarz tutaj"
         rows={3}
-        value={commentContent}
+        defaultValue={commentContent} 
+        onChange={handleCommentChange} // Add the onChange event handler
       ></textarea>
       <button onClick={handleAddComment}>Dodaj</button>
     </div>
