@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import "./AddNewPost.scss";
 import { Timestamp } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
 import { auth, firestore } from "../../firebase/firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
+import FetchAllPosts from "../../components/fetch_all_posts/FetchAllPosts";
 
 export default function AddNewPost() {
   const [content, setContent] = useState("");
@@ -22,8 +22,6 @@ export default function AddNewPost() {
     } else {
       if (user) {
         console.log("if user is logged in");
-
-        //user test: olc@wp.pl UTZg6.uBgqWq6m
 
         const postCollectionRef = collection(firestore, "Posts");
         const newPost = {
@@ -69,6 +67,7 @@ export default function AddNewPost() {
           value="Publikuj"
           onClick={handlePublish}
         />
+        <FetchAllPosts/>
       </div>
     </div>
   );
