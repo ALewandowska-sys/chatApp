@@ -19,18 +19,29 @@ const AddComment: React.FC<AddCommentProps> = ({ postId, userId }) => {
   const [commentContent, setCommentContent] = useState("");
   const [user] = useAuthState(auth);
 
+  // Function to handle changes in the comment text area
+  const handleCommentChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    setCommentContent(e.target.value);
+  };
+
+  // Function to handle adding a new comment
   const handleAddComment = async () => {
+    // Check if the comment content is empty
     if (!commentContent) {
-      alert("Comment cannot be empty");
+      alert("Please write your comment before adding");
       return;
     }
 
+    // Check if the user is logged in
     if (!user) {
       alert("Please log in to add a comment");
       return;
     }
 
+    // Reference to the 'Comments' collection in Firestore
     const commentsCollectionRef = collection(firestore, "Comments");
+    
+    // New comment object to be added to Firestore
     const newComment: Comment = {
       userId: userId,
       postId: postId,
@@ -39,11 +50,12 @@ const AddComment: React.FC<AddCommentProps> = ({ postId, userId }) => {
     };
 
     try {
+      // Add the new comment to the 'Comments' collection
       const docRef = await addDoc(commentsCollectionRef, newComment);
       setCommentContent("");
       console.log("Comment added successfully!");
 
-      // Add comment id to Posts collection
+      // Update the 'comments' array in the corresponding post's document in the 'Posts' collection
       const postCollectionRef = collection(firestore, "Posts");
       const postDocRef = doc(firestore, "Posts", postId);
       await updateDoc(postDocRef, {
@@ -56,12 +68,15 @@ const AddComment: React.FC<AddCommentProps> = ({ postId, userId }) => {
 
   return (
     <div>
+      {/* Text area to write the comment */}
       <textarea
-        placeholder="Napisz swój komentarz tutaj"
+        placeholder="Write your comment here"
         rows={3}
-        value={commentContent}
+        defaultValue={commentContent} 
+        onChange={handleCommentChange} // Add the onChange event handler
       ></textarea>
-      <button onClick={handleAddComment}>Dodaj</button>
+      {/* Button to add the comment */}
+      <button onClick={handleAddComment}>Add Comment</button>
     </div>
   );
 };
