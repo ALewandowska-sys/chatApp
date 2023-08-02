@@ -12,8 +12,8 @@ interface Post {
   userId: string;
   content: string;
   createdAt: any;
-  comments: any[];
-  reactions: any[];
+  comments?: string[]; // Update the comments and reactions type to string[]
+  reactions?: string[];
 }
 
 export default function FetchAllPosts() {
@@ -65,8 +65,10 @@ export default function FetchAllPosts() {
 
   // Function to handle toggling comments visibility
   const handleToggleComments = () => {
-    setShowComments((prevShowComments) => !prevShowComments); // Toggle the value of showComments on click
+    setShowComments((prevShowComments) => !prevShowComments);
   };
+
+
 
   return (
     <div className="fetch-all-posts__container">
@@ -74,16 +76,19 @@ export default function FetchAllPosts() {
         <div key={post.id} className="fetch-all-posts___container___post">
           <UsernameDisplay userId={post.userId} />
           <p>Content: {post.content}</p>
-          <p>CreatedAt: {post.createdAt.toDate().toLocaleString()}</p>
-          {/* Clickable paragraph to toggle comments visibility */}
+          <p>CreatedAt: {post.createdAt?.toDate().toLocaleString()}</p>
           <p onClick={handleToggleComments} style={{ cursor: "pointer", color: "blue" }}>
-            Comments: {post.comments ? post.comments.length : 0}
-          </p>
+Comments: {post.comments ? post.comments.length : 0}
+</p>
           <p>Reactions: {post.reactions ? post.reactions.length : 0}</p>
           <AddComment postId={post.id} userId={post.userId} />
-          {showComments && <FetchAllComments postId={post.id} />} {/* Render FetchAllComments when showComments is true */}
+          {showComments && <FetchAllComments postId={post.id} />}
         </div>
       ))}
     </div>
   );
 }
+
+
+
+
