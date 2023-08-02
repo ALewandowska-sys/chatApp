@@ -6,6 +6,7 @@ import AddComment from "../add_comment/AddComment";
 import { useAuthState } from "react-firebase-hooks/auth";
 import UsernameDisplay from "../username-display/UsernameDisplay";
 import FetchAllComments from "../fetch_all_comments/FetchAllComments";
+import AddReaction from "../add_reaction/AddReaction";
 
 interface Post {
   id: string;
@@ -81,6 +82,7 @@ export default function FetchAllPosts() {
 Comments: {post.comments ? post.comments.length : 0}
 </p>
           <p>Reactions: {post.reactions ? post.reactions.length : 0}</p>
+          <AddReaction postId={post.id}/>
           <AddComment postId={post.id} userId={post.userId} />
           {showComments && <FetchAllComments postId={post.id} />}
         </div>
