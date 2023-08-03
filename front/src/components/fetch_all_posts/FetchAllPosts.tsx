@@ -47,9 +47,16 @@ export default function FetchAllPosts() {
     const postCollectionRef = collection(firestore, "Posts");
     const unsubscribe = onSnapshot(postCollectionRef, (snapshot) => {
       snapshot.docChanges().forEach((change) => {
-        if (change.type === "added" || change.type === "modified") {
-          const doc = change.doc;
-          const post = doc.data() as Post;
+        const doc = change.doc;
+        const post = doc.data() as Post;
+
+        // Handle post addition
+        if (change.type === "added") {
+          setPosts((prevPosts) => [...prevPosts, { ...post, id: doc.id }]);
+        }
+
+        // Handle post modification
+        if (change.type === "modified") {
           setPosts((prevPosts) =>
             prevPosts.map((prevPost) =>
               prevPost.id === doc.id ? { ...post, username: "Unknown User" } : prevPost
@@ -73,8 +80,8 @@ export default function FetchAllPosts() {
 
   return (
     <div className="fetch-all-posts__container">
-      {posts.map((post) => (
-        <div key={post.id} className="fetch-all-posts___container___post">
+      {posts.slice().reverse().map((post) => (
+                <div key={post.id} className="fetch-all-posts___container___post">
           <UsernameDisplay userId={post.userId} />
           <p>Content: {post.content}</p>
           <p>CreatedAt: {post.createdAt?.toDate().toLocaleString()}</p>
