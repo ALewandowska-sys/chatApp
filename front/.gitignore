@@ -25,4 +25,4 @@ yarn-error.log*
 package-lock.json
 
 # api key
-firebase.config.js
+/src/firebase
