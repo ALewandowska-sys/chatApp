@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { collection, getDocs, where, query, onSnapshot } from "firebase/firestore";
+import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { firestore } from "../../firebase/firebase.config";
 import UsernameDisplay from "../username-display/UsernameDisplay";
+import { Post } from "../../interfaces/Post";
 
 interface Comment {
   id: string;
@@ -17,51 +18,69 @@ interface FetchAllCommentsProps {
 
 const FetchAllComments: React.FC<FetchAllCommentsProps> = ({ postId }) => {
   const [comments, setComments] = useState<Comment[]>([]);
-  const commentsCollectionRef = collection(firestore, "Comments");
+
+  const fetchComments = async () => {
+    try {
+      const postDocRef = doc(firestore, "Posts", postId);
+
+      const postDocSnapshot = await getDoc(postDocRef);
+
+      if (postDocSnapshot.exists()) {
+        const commentsData = postDocSnapshot.data()?.comments;
+
+        if (commentsData) {
+          commentsData.sort(
+            (
+              a: { commentCreatedAt: { toDate: () => number } },
+              b: { commentCreatedAt: { toDate: () => number } }
+            ) => b.commentCreatedAt.toDate() - a.commentCreatedAt.toDate()
+          );
+          setComments(commentsData);
+        }
+      } else {
+        console.log("Dokument posta o podanym postId nie istnieje.");
+      }
+    } catch (error) {
+      console.log("Błąd podczas pobierania danych posta:", error);
+    }
+  };
 
   useEffect(() => {
     if (!postId) {
-      return; // Do not execute the fetch if postId is undefined
+      return;
     }
 
-    const fetchComments = async () => {
-      const postCommentsQuery = query(commentsCollectionRef, where("postId", "==", postId));
+    // Tworzenie referencji do dokumentu posta
+    const postDocRef = doc(firestore, "Posts", postId);
 
-      try {
-        const querySnapshot = await getDocs(postCommentsQuery);
-        const fetchedComments = querySnapshot.docs.map((doc) => ({
-          id: doc.id,
-          ...doc.data(),
-        })) as Comment[];
-        setComments(fetchedComments);
-      } catch (error) {
-        console.log("Error fetching comments:", error);
+    // Subskrypcja do zmian w polu 'comments' dokumentu posta
+    const unsubscribe = onSnapshot(postDocRef, (docSnapshot) => {
+      const post = docSnapshot.data() as Post;
+
+      // Sprawdzenie, czy pole 'comments' istnieje i czy nie jest puste
+      if (post?.comments?.length > 0) {
+        setComments(post.comments);
+      } else {
+        // Jeśli pole 'comments' nie istnieje lub jest puste, ustaw pustą tablicę komentarzy
+        setComments([]);
       }
-    };
-
-    // Function to respond to changes in the comments collection (e.g., when a new comment is added)
-    const unsubscribe = onSnapshot(query(commentsCollectionRef, where("postId", "==", postId)), (snapshot) => {
-      const updatedComments: Comment[] = [];
-      snapshot.docChanges().forEach((change) => {
-        if (change.type === "added") {
-          updatedComments.push({ id: change.doc.id, ...change.doc.data() } as Comment);
-        }
-      });
-      setComments((prevComments) => [...prevComments, ...updatedComments]);
     });
 
     fetchComments();
 
-    return () => unsubscribe();
-  }, [postId, commentsCollectionRef]);
+    return () => unsubscribe(); // Zatrzymaj nasłuchiwanie po odmontowaniu komponentu
+  }, [postId]);
 
   return (
     <div>
       {comments.map((comment) => (
         <div key={comment.id}>
           <UsernameDisplay userId={comment.userId} />
-          <p>Comment: {comment.commentContent}</p>
-          <p>CommentCreatedAt: {comment.commentCreatedAt?.toDate().toLocaleString()}</p>
+          <p>Komentarz: {comment.commentContent}</p>
+          <p>
+            Data utworzenia:
+            {comment.commentCreatedAt?.toDate().toLocaleString()}
+          </p>
         </div>
       ))}
     </div>

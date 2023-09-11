@@ -8,12 +8,13 @@ interface UsernameDisplayProps {
 
 const UsernameDisplay: React.FC<UsernameDisplayProps> = ({ userId }) => {
   // State to store the username
-  const [username, setUsername] = useState("Loading..."); // Set an initial value of "Loading..."
+  const [username, setUsername] = useState(""); // Set an initial value of "Loading..."
 
   // Effect triggered after component render or when the userId value changes
   useEffect(() => {
     // Function to fetch the username based on the userId
     const fetchUsername = async (userId: string) => {
+      console.log("user ID: ", userId);
       // Reference to the "Usernames" collection in the Firestore database
       const usernameCollectionRef = collection(firestore, "Usernames");
       try {
@@ -24,7 +25,9 @@ const UsernameDisplay: React.FC<UsernameDisplayProps> = ({ userId }) => {
           (doc) => doc.data().userId === userId
         );
         // Set the username based on the data from the database
-        setUsername(usernameData ? usernameData.data().username : "Unknown User");
+        setUsername(
+          usernameData ? usernameData.data().username : "Unknown User"
+        );
       } catch (error) {
         console.log("Error fetching username:", error);
         // In case of an error, set the username to "Unknown User"
