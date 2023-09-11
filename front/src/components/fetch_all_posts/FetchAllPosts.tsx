@@ -6,98 +6,70 @@ import AddComment from "../add_comment/AddComment";
 import { useAuthState } from "react-firebase-hooks/auth";
 import UsernameDisplay from "../username-display/UsernameDisplay";
 import FetchAllComments from "../fetch_all_comments/FetchAllComments";
-import AddReaction from "../add_reaction/AddReaction";
 
 interface Post {
   id: string;
   userId: string;
   content: string;
   createdAt: any;
-  comments?: string[]; // Update the comments and reactions type to string[]
+  comments?: string[];
   reactions?: string[];
 }
 
 export default function FetchAllPosts() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [user] = useAuthState(auth);
-  const [showComments, setShowComments] = useState<boolean>(false);
+  const [showComments, setShowComments] = useState<string | null>(null);
 
   // Fetch all posts from Firestore
   const fetchPosts = async () => {
     const postCollectionRef = collection(firestore, "Posts");
     try {
       const querySnapshot = await getDocs(postCollectionRef);
-      const fetchedPosts = await Promise.all(
-        querySnapshot.docs.map(async (doc) => {
-          const post = doc.data() as Post;
-          return {
-            ...post,
-            id: doc.id,
-          };
-        })
-      );
+      const fetchedPosts = querySnapshot.docs.map((doc) => {
+        const post = doc.data() as Post;
+        return {
+          ...post,
+          id: doc.id,
+        };
+      });
+      // Sort posts by 'createdAt' in descending order (newest first)
+      fetchedPosts.sort((a, b) => b.createdAt.toDate() - a.createdAt.toDate());
       setPosts(fetchedPosts);
     } catch (error) {
       console.log("Error fetching posts:", error);
     }
   };
 
-  // Subscribe to changes in the 'Posts' collection in Firestore
-  useEffect(() => {
-    const postCollectionRef = collection(firestore, "Posts");
-    const unsubscribe = onSnapshot(postCollectionRef, (snapshot) => {
-      snapshot.docChanges().forEach((change) => {
-        const doc = change.doc;
-        const post = doc.data() as Post;
-
-        // Handle post addition
-        if (change.type === "added") {
-          setPosts((prevPosts) => [...prevPosts, { ...post, id: doc.id }]);
-        }
-
-        // Handle post modification
-        if (change.type === "modified") {
-          setPosts((prevPosts) =>
-            prevPosts.map((prevPost) =>
-              prevPost.id === doc.id ? { ...post, username: "Unknown User" } : prevPost
-            )
-          );
-        }
-      });
-    });
-
-    fetchPosts();
-
-    return () => unsubscribe();
-  }, []);
-
-  // Function to handle toggling comments visibility
-  const handleToggleComments = () => {
-    setShowComments((prevShowComments) => !prevShowComments);
+  // Function to handle toggling comments visibility for a specific post
+  const handleToggleComments = (postId: string) => {
+    setShowComments((prevShowComments) =>
+      prevShowComments === postId ? null : postId
+    );
   };
 
-
+  useEffect(() => {
+    fetchPosts();
+  }, []);
 
   return (
     <div className="fetch-all-posts__container">
-      {posts.slice().reverse().map((post) => (
-                <div key={post.id} className="fetch-all-posts___container___post">
+      {posts.map((post) => (
+        <div key={post.id} className="fetch-all-posts___container___post">
           <UsernameDisplay userId={post.userId} />
           <p>Content: {post.content}</p>
-          <p>CreatedAt: {post.createdAt?.toDate().toLocaleString()}</p>
-          <p onClick={handleToggleComments} style={{ cursor: "pointer", color: "blue" }}>
-Comments: {post.comments ? post.comments.length : 0}
-</p>
+          <p>CreatedAt: {post.createdAt.toDate().toLocaleString()}</p>
+          <p
+            onClick={() => handleToggleComments(post.id)}
+            style={{ cursor: "pointer", color: "blue" }}
+          >
+            Comments: {post.comments ? post.comments.length : 0}
+          </p>
           <p>Reactions: {post.reactions ? post.reactions.length : 0}</p>
-          <AddReaction postId={post.id}/>
           <AddComment postId={post.id} userId={post.userId} />
-          {showComments && <FetchAllComments postId={post.id} />}
+          {showComments === post.id && <FetchAllComments postId={post.id} />}
         </div>
       ))}
     </div>
   );
 }
-
-
-
-
