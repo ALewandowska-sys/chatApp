@@ -3,6 +3,7 @@ import { doc, getDoc, onSnapshot } from "firebase/firestore";
 import { firestore } from "../../firebase/firebase.config";
 import UsernameDisplay from "../username-display/UsernameDisplay";
 import { Post } from "../../interfaces/Post";
+import "./FetchAllComments.scss";
 
 interface Comment {
   id: string;
@@ -72,15 +73,17 @@ const FetchAllComments: React.FC<FetchAllCommentsProps> = ({ postId }) => {
   }, [postId]);
 
   return (
-    <div>
+    <div className="comments">
       {comments.map((comment) => (
-        <div key={comment.id}>
+        <div key={comment.id} className="comments__comment">
           <UsernameDisplay userId={comment.userId} />
-          <p>Komentarz: {comment.commentContent}</p>
-          <p>
-            Data utworzenia:
+
+          <div className="comments__comment__content">
+            {comment.commentContent}
+          </div>
+          <div className="comments__comment__createdAt">
             {comment.commentCreatedAt?.toDate().toLocaleString()}
-          </p>
+          </div>
         </div>
       ))}
     </div>

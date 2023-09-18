@@ -53,19 +53,28 @@ export default function FetchAllPosts() {
   }, []);
 
   return (
-    <div className="fetch-all-posts__container">
+    <div className="fetch-all-posts">
       {posts.map((post) => (
-        <div key={post.id} className="fetch-all-posts___container___post">
+        <div key={post.id} className="fetch-all-posts__container">
           <UsernameDisplay userId={post.userId} />
-          <p>Content: {post.content}</p>
-          <p>CreatedAt: {post.createdAt.toDate().toLocaleString()}</p>
-          <p
-            onClick={() => handleToggleComments(post.id)}
-            style={{ cursor: "pointer", color: "blue" }}
-          >
-            Comments: {post.comments ? post.comments.length : 0}
-          </p>
-          <p>Reactions: {post.reactions ? post.reactions.length : 0}</p>
+          <div className="fetch-all-posts__container__createdAt">
+            {post.createdAt.toDate().toLocaleString()}
+          </div>
+          <div className="fetch-all-posts__container__content">
+            {post.content}
+          </div>
+          <div className="fetch-all-posts__container__comments-reactions">
+            <div
+              className="fetch-all-posts__container__comments"
+              onClick={() => handleToggleComments(post.id)}
+            >
+              Comments: {post.comments ? post.comments.length : 0}
+            </div>
+            <div className="fetch-all-posts__container__reactions">
+              Reactions: {post.reactions ? post.reactions.length : 0}
+            </div>
+          </div>
+
           <AddComment postId={post.id} userId={post.userId} />
           {showComments === post.id && <FetchAllComments postId={post.id} />}
         </div>

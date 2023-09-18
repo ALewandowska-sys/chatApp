@@ -57,7 +57,7 @@ export default function AddNewPost() {
             htmlFor="exampleFormControlTextarea1"
             className="add-new-post__label"
           >
-            Write a postjshdjhdj
+            Write a post
           </label>
         </h4>
         <textarea
