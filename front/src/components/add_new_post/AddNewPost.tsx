@@ -30,10 +30,10 @@ export default function AddNewPost() {
         // Prepare the new post data
         const postCollectionRef = collection(firestore, "Posts");
         const newPost = {
-          userId: user.uid, 
-          content: content, 
-          createdAt: Timestamp.now().toDate(), 
-          comments: [], 
+          userId: user.uid,
+          content: content,
+          createdAt: Timestamp.now().toDate(),
+          comments: [],
           reactions: [], // Initialize an empty array to store reactions (will be updated later)
         };
 
@@ -53,8 +53,11 @@ export default function AddNewPost() {
     <div className="add-new-post__container">
       <div className="add-new-post">
         <h4>
-          <label htmlFor="exampleFormControlTextarea1" className="add-new-post__label">
-            Write a post
+          <label
+            htmlFor="exampleFormControlTextarea1"
+            className="add-new-post__label"
+          >
+            Write a postjshdjhdj
           </label>
         </h4>
         <textarea
