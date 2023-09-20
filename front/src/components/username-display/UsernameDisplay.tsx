@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { collection, getDocs } from "firebase/firestore";
 import { firestore } from "../../firebase/firebase.config";
+import "./UsernameDisplay.scss";
 
 interface UsernameDisplayProps {
   userId: string; // Props containing the user's identifier (userId)
@@ -40,7 +41,7 @@ const UsernameDisplay: React.FC<UsernameDisplayProps> = ({ userId }) => {
   }, [userId]); // Effect depends on the userId value
 
   // Display the username
-  return <p>Username: {username}</p>;
+  return <p className="username">{username}</p>;
 };
 
 export default UsernameDisplay;

@@ -1,3 +1,46 @@
-.fetch-all-posts___container___post{
-    border: solid 2px black;
+.fetch-all-posts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+
+  &__container {
+    width: 100%;
+    border: 1px solid grey;
+    border-radius: 4px;
+    padding: 24px;
+    margin-top: 12px;
+
+    &__createdAt {
+      font-size: 10px;
+    }
+
+    &__content {
+      font-size: 16px;
+      margin: 10px;
+    }
+
+    &__comments-reactions {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-bottom: 12px;
+    }
+
+    &__comments,
+    &__reactions {
+      font-size: 14px;
+      cursor: pointer;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}
+
+textarea {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  margin-bottom: 6px;
 }

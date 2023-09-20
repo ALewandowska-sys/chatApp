@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Timestamp, updateDoc, arrayUnion, doc } from "firebase/firestore";
 import { auth, firestore } from "../../firebase/firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
+import "./AddComment.scss";
 
 interface Comment {
   userId: string;
@@ -59,16 +60,16 @@ const AddComment: React.FC<AddCommentProps> = ({ postId, userId }) => {
   };
 
   return (
-    <div>
-      {/* Text area to write the comment */}
+    <div className="addComment">
       <textarea
         placeholder="Write your comment here"
         rows={3}
         value={commentContent}
         onChange={handleCommentChange} // Add the onChange event handler
       ></textarea>
-      {/* Button to add the comment */}
-      <button onClick={handleAddComment}>Add Comment</button>
+      <button className="addComment__btn" onClick={handleAddComment}>
+        Add Comment
+      </button>
     </div>
   );
 };
