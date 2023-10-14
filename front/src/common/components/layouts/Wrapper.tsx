@@ -10,7 +10,6 @@ const Wrapper = styled.div<WrapperProps>`
   width: ${(props) => props.width || "100%"};
 
   ${(props) => {
-    console.log(props)
     if(props.rel) {
       return `
         position: relative;

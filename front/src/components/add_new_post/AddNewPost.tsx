@@ -6,6 +6,7 @@ import { auth, firestore } from "../../firebase/firebase.config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import CreatePostTextArea from "../../common/components/form/CreatePostTextArea";
+import Flex from "../../common/components/layouts/Flex";
 
 interface IAddNewPostForm {
   content: string;
@@ -81,12 +82,14 @@ export default function AddNewPost() {
           register={register}
           errorMessages={formState.errors?.content?.message}
         />
-        <input
-          type="submit"
-          onClick={(e) => onSubmit(e)}
-          className="add-new-post__submit-btn mt-3"
-          value="Publish"
-        />
+        <Flex right>
+          <input
+            type="submit"
+            onClick={(e) => onSubmit(e)}
+            className="add-new-post__submit-btn"
+            value="Publish"
+          />
+        </Flex>
       </form>
     </div>
   );
