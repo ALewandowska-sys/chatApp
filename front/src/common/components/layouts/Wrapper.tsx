@@ -7,9 +7,25 @@ interface WrapperProps {
 }
 
 const Wrapper = styled.div<WrapperProps>`
-  ${(props) => props.rel && "position: relative;"};
-  ${(props) => props.abs && "position: absolute;"};
   width: ${(props) => props.width || "100%"};
+
+  ${(props) => {
+    console.log(props)
+    if(props.rel) {
+      return `
+        position: relative;
+      `;
+    }
+  }};
+
+  ${(props) => {
+    if(props.abs) {
+      return `
+        position: absolute;
+      `;
+    }
+  }};
+  
 `;
 
 export default Wrapper;

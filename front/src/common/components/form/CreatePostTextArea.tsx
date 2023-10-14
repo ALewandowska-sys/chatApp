@@ -1,14 +1,22 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import Wrapper from "../layouts/Wrapper";
+import AbsLabel from "../Atoms/AbsLabel";
 
 interface TextAreaStyledProps {
-  valid: boolean;
+  isInvalid: boolean;
 }
 
 const TextAreaStyled = styled.textarea<TextAreaStyledProps>`
-  ${(props) => !props.valid && "border-color:  red;"};
-  
+  ${(props) => {
+    if(props.isInvalid) {
+      return `
+        border-color: red;
+        color: red;
+      `;
+    }
+  }};
+
 `;
 
 export interface CreatePostTextAreaProps {
@@ -23,8 +31,9 @@ export default function CreatePostTextArea({
   const [isFocus, setIsFocus] = useState(false);
 
   return (
-    <Wrapper rel>
+    <Wrapper rel={true}>
       <TextAreaStyled
+        isInvalid={errorMessages}
         rows={3}
         onFocus={() => setIsFocus(true)}
         onBlur={() => setIsFocus(false)}
@@ -39,19 +48,13 @@ export default function CreatePostTextArea({
             message: "Content needs at least 5 characters."
           } 
         })}
-        valid={!(!!errorMessages)}
         className="add-new-post__text-area"
         placeholder="How are you feeling today?"
       />
     {errorMessages && 
-      <div style={{ 
-        position: "absolute", 
-        top: "95px", 
-        left: "5px",
-        color: "red",
-      }}>
+      <AbsLabel top="95px" left="5px">
         {errorMessages}
-      </div>
+      </AbsLabel>
     }
     </Wrapper>
   )
