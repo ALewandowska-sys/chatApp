@@ -1,8 +1,9 @@
 .fetch-all-posts {
+  box-sizing: border-box;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  width: 100%;
+  margin: 0rem 5rem 1rem 5rem;
 
   &__container {
     width: 100%;

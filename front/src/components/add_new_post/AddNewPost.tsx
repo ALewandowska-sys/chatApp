@@ -84,6 +84,7 @@ export default function AddNewPost() {
         />
         <Flex right>
           <input
+            disabled={!formState.isValid}
             type="submit"
             onClick={(e) => onSubmit(e)}
             className="add-new-post__submit-btn"
