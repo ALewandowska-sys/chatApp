@@ -15,7 +15,7 @@ const UsernameDisplay: React.FC<UsernameDisplayProps> = ({ userId }) => {
   useEffect(() => {
     // Function to fetch the username based on the userId
     const fetchUsername = async (userId: string) => {
-      console.log("user ID: ", userId);
+      // console.log("user ID: ", userId);
       // Reference to the "Usernames" collection in the Firestore database
       const usernameCollectionRef = collection(firestore, "Usernames");
       try {
@@ -30,7 +30,7 @@ const UsernameDisplay: React.FC<UsernameDisplayProps> = ({ userId }) => {
           usernameData ? usernameData.data().username : "Unknown User"
         );
       } catch (error) {
-        console.log("Error fetching username:", error);
+        // console.log("Error fetching username:", error);
         // In case of an error, set the username to "Unknown User"
         setUsername("Unknown User");
       }

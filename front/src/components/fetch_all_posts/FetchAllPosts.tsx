@@ -53,7 +53,7 @@ export default function FetchAllPosts() {
   }, []);
 
   return (
-    <div className="fetch-all-posts">
+    <div className="fetch-all-posts container">
       {posts.map((post) => (
         <div key={post.id} className="fetch-all-posts__container">
           <UsernameDisplay userId={post.userId} />
