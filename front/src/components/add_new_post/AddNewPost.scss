@@ -1,8 +1,10 @@
 .add-new-post {
   margin: 5em;
 
+  &__labelWrapper {
+    margin: 10px 6px;
+  }
   &__label {
-    margin: 15px 6px;
     font-size: 18px;
     font-weight: bold;
   }
