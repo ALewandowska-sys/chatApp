@@ -8,35 +8,43 @@ interface TextAreaStyledProps {
 }
 
 const TextAreaStyled = styled.textarea<TextAreaStyledProps>`
+  border-color: #d3d3d3;
+  border-radius: 4px;
+  outline: none;
+  &:focus {
+    border-color: black;
+  }
   ${(props) => {
     if(props.isInvalid) {
       return `
         border-color: red;
         color: red;
+        &::placeholder {
+          color: red;
+        }
+        &:focus {
+          border-color: red;
+        }
       `;
     }
   }};
-
 `;
 
 export interface CreatePostTextAreaProps {
   register: any;
-  errorMessages: any;
+  errorMessages: string | undefined;
 }
 
 export default function CreatePostTextArea({
   register,
   errorMessages, 
 }: CreatePostTextAreaProps) {
-  const [isFocus, setIsFocus] = useState(false);
 
   return (
     <Wrapper rel={true}>
       <TextAreaStyled
         isInvalid={errorMessages}
         rows={3}
-        onFocus={() => setIsFocus(true)}
-        onBlur={() => setIsFocus(false)}
         {...register("content", {
           required: "Content cannot be empty", 
           maxLength: { 

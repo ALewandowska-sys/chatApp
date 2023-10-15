@@ -7,6 +7,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import CreatePostTextArea from "../../common/components/form/CreatePostTextArea";
 import Flex from "../../common/components/layouts/Flex";
+import Input from "../../common/components/form/Input";
 
 interface IAddNewPostForm {
   content: string;
@@ -83,11 +84,9 @@ export default function AddNewPost() {
           errorMessages={formState.errors?.content?.message}
         />
         <Flex right>
-          <input
-            disabled={!formState.isValid}
-            type="submit"
-            onClick={(e) => onSubmit(e)}
-            className="add-new-post__submit-btn"
+          <Input 
+            onClick={onSubmit}
+            isInvalid={!formState.isValid} 
             value="Publish"
           />
         </Flex>
