@@ -1,12 +1,10 @@
 .add-new-post {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  align-items: flex-start;
   margin: 5em;
 
+  &__labelWrapper {
+    margin: 10px 6px;
+  }
   &__label {
-    margin-left: 6px;
     font-size: 18px;
     font-weight: bold;
   }
