@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./AddNewPost.scss";
 import { Timestamp } from "firebase/firestore";
 import { collection, addDoc } from "firebase/firestore";
@@ -19,6 +19,10 @@ export default function AddNewPost() {
   });
 
   const [user] = useAuthState(auth);
+
+  useEffect(() => {
+    console.log(formState)
+  }, [])
 
   const onSubmit = (e: any) => {
     e.preventDefault();
@@ -68,7 +72,8 @@ export default function AddNewPost() {
         <Flex right>
           <Input 
             onClick={onSubmit}
-            isInvalid={!formState.isValid} 
+            isInvalid={!formState.isValid}
+            touched={Object.keys(formState.touchedFields).length > 0}
             value="Publish"
           />
         </Flex>

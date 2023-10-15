@@ -43,7 +43,7 @@ export default function CreatePostTextArea({
   return (
     <Wrapper rel={true}>
       <TextAreaStyled
-        isInvalid={errorMessages}
+        isInvalid={!!errorMessages}
         rows={3}
         {...register("content", {
           required: "Content cannot be empty", 
@@ -60,7 +60,7 @@ export default function CreatePostTextArea({
         placeholder="How are you feeling today?"
       />
     {errorMessages && 
-      <AbsLabel top="95px" left="5px">
+      <AbsLabel top="85px" left="5px">
         {errorMessages}
       </AbsLabel>
     }

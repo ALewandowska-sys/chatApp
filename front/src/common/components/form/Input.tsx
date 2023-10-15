@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 interface InputStyledProps {
   isInvalid: boolean;
+  touched: boolean;
 }
 
 const InputStyled = styled.button<InputStyledProps>`
@@ -15,8 +16,12 @@ const InputStyled = styled.button<InputStyledProps>`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
+  &:hover {
+    background-color: #ededed;
+  }
   ${(props) => {
-    if(props.isInvalid) {
+    if(props.touched && props.isInvalid) {
       return `
         border-color: red;
         color: red;
@@ -27,12 +32,14 @@ const InputStyled = styled.button<InputStyledProps>`
 
 export interface InputProps {
   isInvalid: boolean;
+  touched: boolean;
   value: string;
   onClick: (event: MouseEvent) => void;
 }
 
 export default function Input({
   isInvalid,
+  touched,
   value,
   onClick,
 }: InputProps) {
@@ -40,6 +47,7 @@ export default function Input({
     <InputStyled 
       onClick={(e: any) => onClick(e)}
       isInvalid={isInvalid}
+      touched={touched}
     >
       {value}
     </InputStyled>
